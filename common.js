@@ -60,12 +60,14 @@ function moveNpc(npc,directions){
 		directions.splice[dice,1];
 		moved = moveNpc(npc,directions);
 	}
-
 }
 
 function attack(attacker,target){
 	if(target != null){
 		target.hp -= attacker.at - target.df;
+		if(target.hp < 0){
+			target.alive = false;
+		}
 	}
 }
 
@@ -85,7 +87,7 @@ function updateMap(){
 
 function updateNpcs(){
 	npcs.map(function(npc){
-		npc.move(); //Change this, npcs wont allways move, they may attack or whatever
+		npc.think();
 		npc.display();
 	});
 }

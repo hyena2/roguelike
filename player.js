@@ -5,6 +5,7 @@ player = {
 	hp:5,
 	x: 2,
 	y: 2,
+	alive: true,
 	choosenCommand: null,
 	display: function(){
 		displayEntity(this);
@@ -12,5 +13,6 @@ player = {
 	attack: function(targetTile){
 		attack(this,targetTile.npc);
 		this.choosenCommand = null;
+		text = "You attacked!";
 	}
 }

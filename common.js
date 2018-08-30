@@ -67,6 +67,7 @@ function attack(attacker,target){
 		target.hp -= attacker.at - target.df;
 		if(target.hp < 0){
 			target.alive = false;
+			target.character = "x";
 		}
 	}
 }
@@ -82,6 +83,7 @@ function updateMap(){
 	display.clear();
 	drawMap(5,5,map_);
 	updateNpcs();
+	displayItems();
 	player.display();
 }
 
@@ -90,4 +92,19 @@ function updateNpcs(){
 		npc.think();
 		npc.display();
 	});
+}
+
+function displayItems(){
+	items.map(function(item){
+		if(item.x != null && item.y != null){ //Item with x or y null are in the inventory
+			item.display();
+		}
+	});
+}
+
+function take(taker,target){
+	console.log("take");
+	taker.inventory.push(target);
+	target.x = null;
+	target.y = null;
 }

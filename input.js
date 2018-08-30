@@ -61,6 +61,11 @@ document.onkeyup = function(key){
 		text += "In wich direction do you want to attack?";
 	}
 
+	if(key.key == "t"){
+		player.choosenCommand = player.take;
+		text += "What do you want to take?";
+	}
+
 	drawText(text); //Display resulting text
 }
 

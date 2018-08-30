@@ -14,5 +14,12 @@ player = {
 		attack(this,targetTile.npc);
 		this.choosenCommand = null;
 		text = "You attacked!";
+	},
+	inventory: [],
+	take: function(targetTile){
+		if(targetTile.object != null){
+			take(this,targetTile.object);
+			this.choosenCommand = null;
+		}
 	}
 }

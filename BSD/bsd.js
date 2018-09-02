@@ -1,20 +1,16 @@
-
-var display = new ROT.Display({width:80, height:40});
-var container = display.getContainer();
-
-var spaces = [];
-
-function drawMap(width,height,map){
-	for(var i = 0; i < width; i++){
-		for(var j = 0; j < height; j++){
-			foreground = ROT.Color.toRGB([255,255,255]);
-			background = ROT.Color.toRGB([0,0,0]);
-			colors = "%c{" + foreground + "}%b{" + background + "}";
-			display.drawText(i,j,colors + map[i][j]);
-		}
+//How to use this functions, call divideSpace with he root space that is the map, then join the spaces left like this:
+/*
+	divideSpace(0,0,80,40,4,7);
+	for (var i = 0; i < spaces.length; i++){
+		joinSpaces(spaces[i]);
 	}
-}
+*/
+//That will generate a random map
 
+spaces = [];
+var pairsId = 0;
+
+//Given a space, divide from a random point and divide the saces generated
 function divideSpace(topLeftCornerX,topLeftCornerY,width,height,minimun,counter){
 
 	var division;
@@ -30,10 +26,12 @@ function divideSpace(topLeftCornerX,topLeftCornerY,width,height,minimun,counter)
 
 		if(division == "horizontal"){
 			randomY = Math.floor(Math.random() * (height - minimun * 2) + minimun); 
+			/*
 			//For developing porpuoses,remove when done
 			for(var i = 0; i < width; i++){
-				//map[topLeftCornerX + i][topLeftCornerY + randomY] = counter;
+				map[topLeftCornerX + i][topLeftCornerY + randomY] = counter;
 			}
+			*/
 			//Check if the new space can be divided again
 			if(randomY > minimun * 2){ 
 				divideSpace(topLeftCornerX,topLeftCornerY,width,randomY,minimun,counter - 1);
@@ -53,10 +51,12 @@ function divideSpace(topLeftCornerX,topLeftCornerY,width,height,minimun,counter)
 
 		if(division == "vertical"){
 			randomX = Math.floor(Math.random() * (width - minimun * 2) + minimun); 
+			/*
 			//For developing porpuoses,remove when done
 			for(var i = 0; i < height; i++){
 				//map[topLeftCornerX + randomX][topLeftCornerY + i] = counter;
 			}
+			*/
 			if(randomX > minimun * 2){
 				divideSpace(topLeftCornerX,topLeftCornerY,randomX,height,minimun,counter - 1);
 			}else{
@@ -79,6 +79,7 @@ function divideSpace(topLeftCornerX,topLeftCornerY,width,height,minimun,counter)
 	}
 }
 
+//Given a space, generate a room with minimun width and height
 function generateRoom(topLeftCornerX,topLeftCornerY,width,height,minimun){
 
 	var room = {width: null, height: null, x : null, y: null};
@@ -101,7 +102,6 @@ function generateRoom(topLeftCornerX,topLeftCornerY,width,height,minimun){
 	}
 }
 
-var pairsId = 0;
 //This function store the spaces left in every division in order to join them later
 function storeSpacePairs(division,topLeftCornerX,topLeftCornerY,width,height,randomDivisonPoint){
 

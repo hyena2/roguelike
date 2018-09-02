@@ -32,7 +32,7 @@ function divideSpace(topLeftCornerX,topLeftCornerY,width,height,minimun,counter)
 			randomY = Math.floor(Math.random() * (height - minimun * 2) + minimun); 
 			//For developing porpuoses,remove when done
 			for(var i = 0; i < width; i++){
-				map[topLeftCornerX + i][topLeftCornerY + randomY] = counter;
+				//map[topLeftCornerX + i][topLeftCornerY + randomY] = counter;
 			}
 			//Check if the new space can be divided again
 			if(randomY > minimun * 2){ 
@@ -55,7 +55,7 @@ function divideSpace(topLeftCornerX,topLeftCornerY,width,height,minimun,counter)
 			randomX = Math.floor(Math.random() * (width - minimun * 2) + minimun); 
 			//For developing porpuoses,remove when done
 			for(var i = 0; i < height; i++){
-				map[topLeftCornerX + randomX][topLeftCornerY + i] = counter;
+				//map[topLeftCornerX + randomX][topLeftCornerY + i] = counter;
 			}
 			if(randomX > minimun * 2){
 				divideSpace(topLeftCornerX,topLeftCornerY,randomX,height,minimun,counter - 1);
@@ -96,7 +96,7 @@ function generateRoom(topLeftCornerX,topLeftCornerY,width,height,minimun){
 
 	for(var i = 0; i < room.width; i++){
 		for (var j = 0; j < room.height; j++){
-			map[topLeftCornerX + room.x + i][topLeftCornerY + room.y + j] = "#";
+			map[topLeftCornerX + room.x + i][topLeftCornerY + room.y + j] = ".";
 		}
 	}
 }
@@ -126,7 +126,7 @@ function joinSpaces(spaces){
 	var x1 = Math.floor((Math.random() * spaces[0].width) + spaces[0].topLeftCornerX);
 	var y1 = Math.floor((Math.random() * spaces[0].height) + spaces[0].topLeftCornerY);
 
-	while(map[x1][y1] != "#"){
+	while(map[x1][y1] != "."){
 		x1 = Math.floor((Math.random() * spaces[0].width) + spaces[0].topLeftCornerX);
 		y1 = Math.floor((Math.random() * spaces[0].height) + spaces[0].topLeftCornerY);
 	}
@@ -134,11 +134,27 @@ function joinSpaces(spaces){
 	var x2 = Math.floor((Math.random() * spaces[1].width) + spaces[1].topLeftCornerX);
 	var y2 = Math.floor((Math.random() * spaces[1].height) + spaces[1].topLeftCornerY);
 
-	while(map[x2][y2] != "#"){
-		 x2 = Math.floor((Math.random() * spaces[1].width) + spaces[1].topLeftCornerX);
-		 y2 = Math.floor((Math.random() * spaces[1].height) + spaces[1].topLeftCornerY);
+	while(map[x2][y2] != "."){
+		x2 = Math.floor((Math.random() * spaces[1].width) + spaces[1].topLeftCornerX);
+		y2 = Math.floor((Math.random() * spaces[1].height) + spaces[1].topLeftCornerY);
 	}
 
-	//for(var i = 0; i < x1 - x2
+	while(x1 != x2){
+		if(x1 < x2){
+			x1++;
+		}else{
+			x1--;
+		}
+		map[x1][y1] = ".";
+	}
+
+	while(y1 != y2){
+		if(y1 < y2){
+			y1++;
+		}else{
+			y1--;
+		}
+		map[x1][y1] = ".";
+	}
 
 }

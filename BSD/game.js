@@ -12,13 +12,13 @@ window.onload = function() {
 
 	document.body.appendChild(container);
 
-	divideSpace(0,0,80,40,4,1);
-
-	drawMap(80,40,map);
+	divideSpace(0,0,80,40,4,7);
 	
 	for (var i = 0; i < spaces.length; i++){
 		joinSpaces(spaces[i]);
 	}
+
+	drawMap(80,40,map);
 
 }
 

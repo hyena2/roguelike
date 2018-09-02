@@ -9,8 +9,16 @@ for(var i = 0; i < 80; i++){
 }
 
 window.onload = function() {
+
 	document.body.appendChild(container);
-	divideSpace(0,0,80,40,4,7);
+
+	divideSpace(0,0,80,40,4,1);
+
 	drawMap(80,40,map);
+	
+	for (var i = 0; i < spaces.length; i++){
+		joinSpaces(spaces[i]);
+	}
+
 }
 

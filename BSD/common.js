@@ -2,6 +2,7 @@
 var display = new ROT.Display({width:80, height:40});
 var container = display.getContainer();
 
+var spaces = [];
 
 function drawMap(width,height,map){
 	for(var i = 0; i < width; i++){
@@ -21,9 +22,6 @@ function divideSpace(topLeftCornerX,topLeftCornerY,width,height,minimun,counter)
 	var randomY;
 	
 	if(counter > 0){
-
-		console.log("dividing space " + counter);
-
 		if(Math.random() > 0.5){
 			division = "horizontal";
 		}else{
@@ -48,7 +46,11 @@ function divideSpace(topLeftCornerX,topLeftCornerY,width,height,minimun,counter)
 			}else{
 				generateRoom(topLeftCornerX,topLeftCornerY + randomY,width,height - randomY,minimun);
 			}
+
+			storeSpacePairs(division,topLeftCornerX,topLeftCornerY,width,height,randomY)
+
 		}
+
 		if(division == "vertical"){
 			randomX = Math.floor(Math.random() * (width - minimun * 2) + minimun); 
 			//For developing porpuoses,remove when done
@@ -58,14 +60,17 @@ function divideSpace(topLeftCornerX,topLeftCornerY,width,height,minimun,counter)
 			if(randomX > minimun * 2){
 				divideSpace(topLeftCornerX,topLeftCornerY,randomX,height,minimun,counter - 1);
 			}else{
-				generateRoom(topLeftCornerX,topLeftCornerY,randomX,height,minimun);
+				generateRoom(topLeftCornerX,topLeftCornerY,randomX,height,minimun); //No more space for dividing? Make a room
 			}
 			if(width - randomX > minimun * 2){ 
 				divideSpace(topLeftCornerX + randomX,topLeftCornerY,width - randomX,height,minimun,counter - 1);
 			}else{
 				generateRoom(topLeftCornerX + randomX,topLeftCornerY,width - randomX,height,minimun);
 			}
+
+			storeSpacePairs(division,topLeftCornerX,topLeftCornerY,width,height,randomX)
 		}
+
 	}
 
 	//If this is the last iteration, we must do a room
@@ -94,4 +99,46 @@ function generateRoom(topLeftCornerX,topLeftCornerY,width,height,minimun){
 			map[topLeftCornerX + room.x + i][topLeftCornerY + room.y + j] = "#";
 		}
 	}
+}
+
+var pairsId = 0;
+//This function store the spaces left in every division in order to join them later
+function storeSpacePairs(division,topLeftCornerX,topLeftCornerY,width,height,randomDivisonPoint){
+
+	spaces[pairsId] = [];
+
+	if(division == "horizontal"){
+		spaces[pairsId].push({topLeftCornerX:topLeftCornerX,topLeftCornerY:topLeftCornerY,width:width,height:randomDivisonPoint});
+		spaces[pairsId].push({topLeftCornerX:topLeftCornerX,topLeftCornerY:topLeftCornerY + randomDivisonPoint,width:width,height:height - randomDivisonPoint});
+	}
+	else if (division == "vertical"){
+		spaces[pairsId].push({topLeftCornerX:topLeftCornerX,topLeftCornerY:topLeftCornerY,width:randomDivisonPoint,height:height});
+		spaces[pairsId].push({topLeftCornerX:topLeftCornerX + randomDivisonPoint,topLeftCornerY:topLeftCornerY,width: width - randomDivisonPoint,height:height});
+	}
+
+	pairsId++; //Increment id for the next one
+}
+
+//This is the function in charge of joining spaces Spaces is an array with length 2 that contains botth spaces to be join, finds a solid tile
+//in every space and make a corridor between them
+function joinSpaces(spaces){
+
+	var x1 = Math.floor((Math.random() * spaces[0].width) + spaces[0].topLeftCornerX);
+	var y1 = Math.floor((Math.random() * spaces[0].height) + spaces[0].topLeftCornerY);
+
+	while(map[x1][y1] != "#"){
+		x1 = Math.floor((Math.random() * spaces[0].width) + spaces[0].topLeftCornerX);
+		y1 = Math.floor((Math.random() * spaces[0].height) + spaces[0].topLeftCornerY);
+	}
+
+	var x2 = Math.floor((Math.random() * spaces[1].width) + spaces[1].topLeftCornerX);
+	var y2 = Math.floor((Math.random() * spaces[1].height) + spaces[1].topLeftCornerY);
+
+	while(map[x2][y2] != "#"){
+		 x2 = Math.floor((Math.random() * spaces[1].width) + spaces[1].topLeftCornerX);
+		 y2 = Math.floor((Math.random() * spaces[1].height) + spaces[1].topLeftCornerY);
+	}
+
+	//for(var i = 0; i < x1 - x2
+
 }

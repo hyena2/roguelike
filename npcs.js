@@ -9,7 +9,7 @@ var leecher = {
 	name: "leecher",
 	desciption: "A gigantic worm-like animal that stinks.",
 	move: function(){
-		moveNpc(this,[0,1,2,3]);
+		moveNpc(this);
 	},
 	display: function(){
 		displayEntity(this);

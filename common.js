@@ -20,8 +20,9 @@ function drawMap(width,height,map){
 	}
 }
 
-function moveNpc(npc,directions){
+function moveNpc(npc){
 
+	var directions = [0,1,2,3];
 	var dice = directions[Math.floor(Math.random() * directions.length)];
 	var currentTile = npc.x + (npc.y*height);
 	var moved = false;

@@ -10,6 +10,7 @@ function displayEntity(entity){
 }
 
 function drawMap(width,height,map){
+	display.clear();
 	for(var i = 0; i < width; i++){
 		for(var j = 0; j < height; j++){
 			foreground = ROT.Color.toRGB([255,255,255]);
@@ -103,7 +104,6 @@ function displayItems(){
 }
 
 function take(taker,target){
-	console.log("take");
 	taker.inventory.push(target);
 	target.x = null;
 	target.y = null;

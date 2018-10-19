@@ -6,6 +6,7 @@ player = {
 	x: 2,
 	y: 2,
 	alive: true,
+	inventory: [],
 	choosenCommand: null,
 	display: function(){
 		displayEntity(this);
@@ -15,11 +16,10 @@ player = {
 		this.choosenCommand = null;
 		text = "You attacked!";
 	},
-	inventory: [],
 	take: function(targetTile){
 		if(targetTile.object != null){
 			take(this,targetTile.object);
 			this.choosenCommand = null;
 		}
-	}
+	},
 }

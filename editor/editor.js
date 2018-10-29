@@ -1,4 +1,5 @@
 var state = {
+	mapWidth: 80,
 	map : [],
 	previousEditorPos : [0,0],
 	currentEditorPos : [0,0],
@@ -20,70 +21,79 @@ var state = {
 	subscribers : [],
 }
 
+for (var i = 0; i < 4000; i++) {
+	state.map.push(".");
+}
+
 //Subscriber
 var mapUpdater = {
 	callback: function(state){
+		background = ROT.Color.toRGB([255, 255, 255]);
+		foreground = ROT.Color.toRGB([0, 0, 0]);
+		colors = "%c{" + foreground + "}%b{" + background + "}";
+		display.drawText(state.currentEditorPos[0], state.currentEditorPos[1], 
+			colors + state.map[(state.currentEditorPos[0] * state.mapWidth) + state.currentEditorPos[1]]);
 	}
 }
 
 //Subscriber
 var editorPosHandler = {
-	callback: function(state){
-		changeTileToBlackBackground(state.previousEditorPos);	
-		changeTileToWhiteBackground(state.currentEditorPos);	
+	callback: function (state) {
+		changeTileToBlackBackground(state.previousEditorPos);
+		changeTileToWhiteBackground(state.currentEditorPos);
 	}
 }
 
-for(var i = 0; i < 4000; i++){
-	state.map.push(".");
-}
-
-
-window.onload = function(){
+window.onload = function () {
 	document.body.appendChild(container);
 	state.subscribe(mapUpdater);
 	state.subscribe(editorPosHandler);
-	drawMap(20,80,state.map);
+	drawMap(20, 80, state.map);
 }
 
 
-window.onkeyup = function(e){
-	if(e.key == "ArrowDown"){
-		state.set(['previousEditorPos'],[state.currentEditorPos]);
-		state.set(['currentEditorPos'],[[state.currentEditorPos[0],state.currentEditorPos[1] + 1]]);
+window.onkeyup = function (e) {
+	if (e.key == "ArrowDown") {
+		state.set(['previousEditorPos'], [state.currentEditorPos]);
+		state.set(['currentEditorPos'], [[state.currentEditorPos[0], state.currentEditorPos[1] + 1]]);
 	}
-	else if(e.key == "ArrowUp"){
-		state.set(['previousEditorPos'],[state.currentEditorPos]);
-		state.set(['currentEditorPos'],[[state.currentEditorPos[0],state.currentEditorPos[1] - 1]]);
+	else if (e.key == "ArrowUp") {
+		state.set(['previousEditorPos'], [state.currentEditorPos]);
+		state.set(['currentEditorPos'], [[state.currentEditorPos[0], state.currentEditorPos[1] - 1]]);
 	}
-	else if(e.key == "ArrowRight"){
-		state.set(['previousEditorPos'],[state.currentEditorPos]);
-		state.set(['currentEditorPos'],[[state.currentEditorPos[0] + 1,state.currentEditorPos[1]]]);
+	else if (e.key == "ArrowRight") {
+		state.set(['previousEditorPos'], [state.currentEditorPos]);
+		state.set(['currentEditorPos'], [[state.currentEditorPos[0] + 1, state.currentEditorPos[1]]]);
 	}
-	else if(e.key == "ArrowLeft"){
-		state.set(['previousEditorPos'],[state.currentEditorPos]);
-		state.set(['currentEditorPos'],[[state.currentEditorPos[0] - 1,state.currentEditorPos[1]]]);
+	else if (e.key == "ArrowLeft") {
+		state.set(['previousEditorPos'], [state.currentEditorPos]);
+		state.set(['currentEditorPos'], [[state.currentEditorPos[0] - 1, state.currentEditorPos[1]]]);
+	}
+	else {
+		var updatedMap = state.map;
+		updatedMap[(state.currentEditorPos[0] * state.mapWidth) + state.currentEditorPos[1]] = e.key;
+		state.set(['map'], [updatedMap]);
 	}
 }
 
-function mouseIsOverMap(mousePos){
-	if(mousePos[0] != -1 && mousePos[1] != -1){
+function mouseIsOverMap(mousePos) {
+	if (mousePos[0] != -1 && mousePos[1] != -1) {
 		return true;
-	}else{
+	} else {
 		return false;
 	}
 }
 
-function changeTileToWhiteBackground(tile){
-	background = ROT.Color.toRGB([255,255,255]);
-	foreground = ROT.Color.toRGB([0,0,0]);
+function changeTileToWhiteBackground(tile) {
+	background = ROT.Color.toRGB([255, 255, 255]);
+	foreground = ROT.Color.toRGB([0, 0, 0]);
 	colors = "%c{" + foreground + "}%b{" + background + "}";
-	display.drawText(tile[0],tile[1],colors + ".");
+	display.drawText(tile[0], tile[1], colors + state.map[(tile[0] * state.mapWidth) + tile[1]]);
 }
 
-function changeTileToBlackBackground(tile){
-	foreground = ROT.Color.toRGB([255,255,255]);
-	background = ROT.Color.toRGB([0,0,0]);
+function changeTileToBlackBackground(tile) {
+	foreground = ROT.Color.toRGB([255, 255, 255]);
+	background = ROT.Color.toRGB([0, 0, 0]);
 	colors = "%c{" + foreground + "}%b{" + background + "}";
-	display.drawText(tile[0],tile[1],colors + ".");
+	display.drawText(tile[0], tile[1], colors + state.map[(tile[0] * state.mapWidth) + tile[1]]);
 }

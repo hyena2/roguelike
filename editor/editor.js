@@ -70,9 +70,12 @@ window.onkeyup = function (e) {
 		state.set(['currentEditorPos'], [[state.currentEditorPos[0] - 1, state.currentEditorPos[1]]]);
 	}
 	else {
-		var updatedMap = state.map;
-		updatedMap[(state.currentEditorPos[0] * state.mapWidth) + state.currentEditorPos[1]] = e.key;
-		state.set(['map'], [updatedMap]);
+		console.log(e.key)
+		if(e.key != "Shift" && e.key != "AltGraph" && e.key != "Dead" && e.key != "Control"){
+			var updatedMap = state.map;
+			updatedMap[(state.currentEditorPos[0] * state.mapWidth) + state.currentEditorPos[1]] = e.key;
+			state.set(['map'], [updatedMap]);
+		}
 	}
 }
 

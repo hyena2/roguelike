@@ -10,6 +10,9 @@ function displayEntity(entity){
 }
 
 function drawMap(width,height,map){
+	display.setOptions({
+		fontStyle: "bold",
+	});
 	display.clear();
 	for(var i = 0; i < width; i++){
 		for(var j = 0; j < height; j++){

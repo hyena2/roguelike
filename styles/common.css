@@ -1,0 +1,17 @@
+@font-face{
+    font-family: myFancyFont;
+    src: url('ProggySquare.ttf');
+}
+
+*{
+    font-family: 'myFancyFont';
+    font-size: 19px;
+    background-color:black;
+    color:white;
+}
+
+nav{
+    margin-bottom:25px;    
+    margin-top:25px;    
+}
+

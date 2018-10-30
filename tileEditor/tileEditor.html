@@ -1,0 +1,34 @@
+<html>
+<title>Editor Roguelike</title>
+</head>
+<link rel="stylesheet" type="text/css" href="../styles/common.css">
+<link rel="stylesheet" type="text/css" href="../styles/tileEditor.css">
+<link href='../styles/ProggySquare.ttf' stylesheet' type='text/css'>
+
+<body>
+	<nav>
+		<a href="../mapEditor/mapEditor.html">Map</a>
+		<a href="">Player</a>
+		<a href="">Npcs</a>
+		<a href="">Objects</a>
+		<a href="">Tiles</a>
+		<a href="">Game</a>
+    </nav>
+    <form>
+        <label>Tile character</label>
+        <input type="Text" id="character">
+        <label>Description</label>
+        <input type="Text" id="description">
+        <label>Damage</label>
+        <input type="checkbox" id="damage">
+        <label>Solid</label>
+        <input type="checkbox" id="solid">
+	</form>
+	<a id="save">Save tile</a>
+
+	<p>Tiles</p>
+	<div id="tiles">
+	</div>
+	<script src="tileEditor.js"></script>
+</body>
+</html>

@@ -22,7 +22,7 @@ var state = {
 var tilesUpdater = {
     callback : function(state){
         tilesNode = document.getElementById("tiles");
-        while (tilesNode.hasChildNodes()) {
+        while (tilesNode.hasChildNodes()) { //Reset node
             tilesNode.removeChild(tilesNode.lastChild);
         }
         state.tiles.map(tile => {

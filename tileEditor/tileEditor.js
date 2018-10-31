@@ -38,7 +38,8 @@ var tilesUpdater = {
 window.onload = function () {
     state.subscribe(tilesUpdater);
 	loadGame('http://localhost:1234/getGame',"test",(response) => {
-    		state.set(['game'],[JSON.parse(response)[0]]);
+            state.set(['game'],[JSON.parse(response)[0]]);
+            delete state.game._id;
     });
 }
 

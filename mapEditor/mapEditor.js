@@ -52,7 +52,7 @@ window.onload = function () {
 	state.subscribe(editorPosHandler);
 	loadGame('http://localhost:1234/getGame',"test",(response) => {
 		state.set(['game'],[JSON.parse(response)[0]]) //Even we only want one element the back returns an array, 
-													  //take only the first element.
+		delete state.game._id;
 	});
 	drawMap(20, 80, state.map['map']);
 }

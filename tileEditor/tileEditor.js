@@ -1,5 +1,6 @@
 var state = {
     tiles : [],
+    game : null,
     set : function(props,values){
 		for(var i = 0; i < props.length; i++){
 			this[props[i]] = values[i];
@@ -36,6 +37,9 @@ var tilesUpdater = {
 
 window.onload = function () {
     state.subscribe(tilesUpdater);
+	loadGame('http://localhost:1234/getGame',"test",(response) => {
+    		state.set(['game'],[JSON.parse(response)[0]]);
+    });
 }
 
 //Event
@@ -49,5 +53,4 @@ saveButton.onclick = function () {
     var updatedTiles = state.tiles;
     updatedTiles.push(newTile);
     state.set(['tiles'],[updatedTiles]);
-    post("http://localhost:1234/insertTiles", state.tiles[0]);
 }

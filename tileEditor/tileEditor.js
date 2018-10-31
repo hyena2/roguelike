@@ -1,9 +1,13 @@
 var state = {
     tiles : [],
-    game : null,
-    set : function(props,values){
-		for(var i = 0; i < props.length; i++){
-			this[props[i]] = values[i];
+    game : {},
+	set: function (props, values) {
+		for (var i = 0; i < props.length; i++) {
+			if (!typeof values[i] === 'object') { //If the value is an object, copy by value
+				this[props[i]] = values[i];
+			} else {
+				this[props[i]] = JSON.parse(JSON.stringify(values[i])); //Copy by value, this makes a copy of an object not a reference
+			}
 		}
 		this.notify();
 	},

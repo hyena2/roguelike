@@ -3,7 +3,7 @@ var state = {
 	map : { mapName : "", map : []},
 	previousEditorPos : [0,0],
 	currentEditorPos : [0,0],
-	game : null,
+	game : {},
 	gameMaps: null,
 	drawMap : function(){
 		for(var i = 0; i < this.map['map'].length; i++ ){

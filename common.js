@@ -19,7 +19,7 @@ function drawMap(width,height,map){
 			foreground = ROT.Color.toRGB([255,255,255]);
 			background = ROT.Color.toRGB([0,0,0]);
 			colors = "%c{" + foreground + "}%b{" + background + "}";
-			display.drawText(j,i,colors + map[(i*width)+j]);
+			display.drawText(i,j,colors + map[ i + (j * height)]);
 		}
 	}
 }
@@ -86,9 +86,9 @@ function drawText(text){
 
 function updateMap(){
 	display.clear();
-	drawMap(5,5,map_);
-	updateNpcs();
-	displayItems();
+	drawMap(80,20,map_);
+//	updateNpcs();
+	//displayItems();
 	player.display();
 }
 

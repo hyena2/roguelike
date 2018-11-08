@@ -1,7 +1,7 @@
 document.onkeyup = function(key){
 
 	text = ""; //Reset text at the begining of the turn
-	currentTile = player.x + (player.y*5);
+	currentTile = player.x + (player.y*80);
 
 	if(key.key == "ArrowRight"){
 		if(player.choosenCommand != null){
@@ -31,7 +31,7 @@ document.onkeyup = function(key){
 
 	if(key.key == "ArrowDown"){
 		if(player.choosenCommand != null){
-			player.choosenCommand(map_Info[currentTile + width]);
+			player.choosenCommand(map_Info[currentTile + height]);
 			updateMap();
 		}else{
 			if(tiles[map_[currentTile + width]].solid == false){
@@ -44,7 +44,7 @@ document.onkeyup = function(key){
 
 	if(key.key == "ArrowUp"){
 		if(player.choosenCommand != null){
-			player.choosenCommand(map_Info[currentTile - width]);
+			player.choosenCommand(map_Info[currentTile - height]);
 			updateMap();
 		}else{
 			if(tiles[map_[currentTile - width]].solid == false){

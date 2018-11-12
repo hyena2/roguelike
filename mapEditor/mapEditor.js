@@ -93,7 +93,7 @@ window.onload = function () {
 		delete state.game._id; //Delete the _id property so mongodb can update the object without problems
 	});
 
-	drawMap(20, 80, state.map['map']);
+	drawMap(80, 20, state.map['map']);
 }
 
 //Event

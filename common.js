@@ -19,7 +19,7 @@ function drawMap(width,height,map){
 			foreground = ROT.Color.toRGB([255,255,255]);
 			background = ROT.Color.toRGB([0,0,0]);
 			colors = "%c{" + foreground + "}%b{" + background + "}";
-			display.drawText(i,j,colors + map[ i + (j * height)]);
+			display.drawText(i,j,colors + state.map.map[ i + (j * height)]);
 		}
 	}
 }

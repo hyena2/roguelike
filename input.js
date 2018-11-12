@@ -8,9 +8,10 @@ document.onkeyup = function(key){
 			player.choosenCommand(map_Info[currentTile + 1]);
 			updateMap();
 		}else{
-			if(tiles[map_[currentTile + 1]].solid == false){
-				player.x++;
-				updateMap();
+			if(state.tiles[state.map.map[currentTile + 1]].solid == false){
+				updatedPlayer = state.player;
+				updatedPlayer.x++;
+				state.set(['player'],[updatedPlayer]);
 				text += "You moved to the East.";
 			}
 		}
@@ -21,9 +22,10 @@ document.onkeyup = function(key){
 			player.choosenCommand(map_Info[currentTile - 1]);
 			updateMap();
 		}else{
-			if(tiles[map_[currentTile - 1]].solid == false){
-				player.x--;
-				updateMap();
+			if(state.tiles[state.map.map[currentTile - 1]].solid == false){
+				updatedPlayer = state.player;
+				updatedPlayer.x--;
+				state.set(['player'],[updatedPlayer]);
 				text += "You moved to the West.";
 			}
 		}
@@ -31,12 +33,13 @@ document.onkeyup = function(key){
 
 	if(key.key == "ArrowDown"){
 		if(player.choosenCommand != null){
-			player.choosenCommand(map_Info[currentTile + height]);
+			player.choosenCommand(map_Info[currentTile + state.height]);
 			updateMap();
 		}else{
-			if(tiles[map_[currentTile + width]].solid == false){
-				player.y++;
-				updateMap();
+			if(state.tiles[state.map.map[currentTile + state.width]].solid == false){
+				updatedPlayer = state.player;
+				updatedPlayer.y++;
+				state.set(['player'],[updatedPlayer]);
 				text += "You moved to the South.";
 			}
 		}
@@ -44,12 +47,13 @@ document.onkeyup = function(key){
 
 	if(key.key == "ArrowUp"){
 		if(player.choosenCommand != null){
-			player.choosenCommand(map_Info[currentTile - height]);
+			player.choosenCommand(map_Info[currentTile - state.height]);
 			updateMap();
 		}else{
-			if(tiles[map_[currentTile - width]].solid == false){
-				player.y--;
-				updateMap();
+			if(state.tiles[state.map.map[currentTile - state.width]].solid == false){
+				updatedPlayer = state.player;
+				updatedPlayer.y--;
+				state.set(['player'],[updatedPlayer]);
 				text += "You moved to the North.";
 			}
 		}

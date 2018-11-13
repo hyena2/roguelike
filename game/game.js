@@ -52,6 +52,16 @@ var state = {
 		this.subscribers.push(subscriber);
 	},
 	subscribers: [],
+	drawMap: function () {
+		for (var i = 0; i < this.map['map'].length; i++) {
+			for (var j = 0; j < this.map['map'][i].length; j++) {
+				foreground = ROT.Color.toRGB([255, 255, 255]);
+				background = ROT.Color.toRGB([0, 0, 0]);
+				colors = "%c{" + foreground + "}%b{" + background + "}";
+				display.drawText(i, j, colors + state.map['map'][i][j]);
+			}
+		}
+	}
 }
 
 //Event
@@ -61,18 +71,21 @@ window.onload = function () {
 		state.set(['map'], [state.game.maps[0]]);
 		//Fill map info
 		tempMapInfo = [];
-		for (var i = 0; i < state.map.length; i++) {
-			tempMapInfo[i] = {
-				tile: state.map[i],
-				npc: null,
-				object: null,
+		for (var i = 0; i < state.map.map.length; i++) {
+			tempMapInfo[i] = [];
+			for (var j = 0; j < state.map.map[i].length; j++) {
+				tempMapInfo[i][j] = {
+					tile: state.map.map[i][j],
+					npc: null,
+					object: null,
+				}
 			}
 		}
 		state.set(['mapInfo'], [tempMapInfo]);
 		state.game.tiles.map(tile => {
 			state.tiles[tile.character] = { solid: tile.solid, description: tile.description };
 		})
-		drawMap(80, 20, state.map.map);
+		state.drawMap();
 		state.playerController.display();
 	});
 	document.body.appendChild(container);
@@ -80,8 +93,8 @@ window.onload = function () {
 
 var playerRenderer = {
 	callback: function () {
-		if(state.map != null){ //Check because of the first call
-			drawMap(80,20,state.map.map);
+		if (state.map != null) { //Check because of the first call
+			state.drawMap();
 		}
 		state.playerController.display();
 	}

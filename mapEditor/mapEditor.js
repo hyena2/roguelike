@@ -1,16 +1,19 @@
 var state = {
 	mapWidth: 80,
-	map : { mapName : "", map : []},
+	mapHeight: 20,
+	map : { mapName : "", map : null},
 	previousEditorPos : [0,0],
 	currentEditorPos : [0,0],
 	game : {},
 	gameMaps: null,
 	drawMap : function(){
-		for(var i = 0; i < this.map['map'].length; i++ ){
-			foreground = ROT.Color.toRGB([255, 255, 255]);
-			background = ROT.Color.toRGB([0, 0, 0]);
-			colors = "%c{" + foreground + "}%b{" + background + "}";
-			display.drawText(Math.round(i/80),i%80, colors + state.map['map'][i]);
+		for (var i = 0; i < this.map['map'].length; i++) {
+			for (var j = 0; j < this.map['map'][i].length; j++) {
+				foreground = ROT.Color.toRGB([255, 255, 255]);
+				background = ROT.Color.toRGB([0, 0, 0]);
+				colors = "%c{" + foreground + "}%b{" + background + "}";
+				display.drawText(i, j, colors + state.map['map'][i][j]);
+			}
 		}
 	},
 	set: function (props, values) {
@@ -35,8 +38,12 @@ var state = {
 	subscribers: [],
 }
 
-for (var i = 0; i < 4000; i++) {
-	state.map['map'].push(".");
+state.map.map = [];
+for (var i = 0; i < state.mapWidth; i++) {
+	state.map.map[i] = [];
+	for (var j = 0; j < state.mapHeight; j++) {
+		state.map.map[i][j] = ".";
+	}
 }
 
 //Subscriber
@@ -46,7 +53,7 @@ var mapUpdater = {
 		foreground = ROT.Color.toRGB([0, 0, 0]);
 		colors = "%c{" + foreground + "}%b{" + background + "}";
 		display.drawText(state.currentEditorPos[0], state.currentEditorPos[1],
-			colors + state.map['map'][(state.currentEditorPos[0] * state.mapWidth) + state.currentEditorPos[1]]);
+			colors + state.map['map'][state.currentEditorPos[0]][state.currentEditorPos[1]]);
 	}
 }
 
@@ -93,7 +100,7 @@ window.onload = function () {
 		delete state.game._id; //Delete the _id property so mongodb can update the object without problems
 	});
 
-	drawMap(80, 20, state.map['map']);
+	state.drawMap();
 }
 
 //Event
@@ -117,7 +124,7 @@ window.onkeyup = function (e) {
 	else {
 		if (e.key != "Shift" && e.key != "AltGraph" && e.key != "Dead" && e.key != "Control") {
 			var updatedMap = state.map;
-			updatedMap['map'][(state.currentEditorPos[0] * state.mapWidth) + state.currentEditorPos[1]] = e.key;
+			updatedMap['map'][state.currentEditorPos[0]][state.currentEditorPos[1]] = e.key;
 			state.set(['map'], [updatedMap]);
 		}
 	}
@@ -155,12 +162,12 @@ function changeTileToWhiteBackground(tile) {
 	background = ROT.Color.toRGB([255, 255, 255]);
 	foreground = ROT.Color.toRGB([0, 0, 0]);
 	colors = "%c{" + foreground + "}%b{" + background + "}";
-	display.drawText(tile[0], tile[1], colors + state.map['map'][(tile[0] * state.mapWidth) + tile[1]]);
+	display.drawText(tile[0], tile[1], colors + state.map['map'][tile[0]][tile[1]]);
 }
 
 function changeTileToBlackBackground(tile) {
 	foreground = ROT.Color.toRGB([255, 255, 255]);
 	background = ROT.Color.toRGB([0, 0, 0]);
 	colors = "%c{" + foreground + "}%b{" + background + "}";
-	display.drawText(tile[0], tile[1], colors + state.map['map'][(tile[0] * state.mapWidth) + tile[1]]);
+	display.drawText(tile[0], tile[1], colors + state.map['map'][tile[0]][tile[1]]);
 }

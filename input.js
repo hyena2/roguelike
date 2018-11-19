@@ -4,8 +4,8 @@ document.onkeyup = function(key){
 
 	if(key.key == "ArrowRight"){
 		if(player.choosenCommand != null){
-			player.choosenCommand(state.mapInfo[state.player.x + 1][state.player.y]);
-			updateMap();
+			state.player.choosenCommand(state.mapInfo[state.player.x + 1][state.player.y]);
+			//updateMap();
 		}else{
 			if(state.tiles[state.map.map[state.player.x + 1][state.player.y]].solid == false){
 				updatedPlayer = state.player;
@@ -19,7 +19,7 @@ document.onkeyup = function(key){
 	if(key.key == "ArrowLeft"){
 		if(player.choosenCommand != null){
 			player.choosenCommand(state.mapInfo[state.player.x - 1][state.player.y]);
-			updateMap();
+			//updateMap();
 		}else{
 			if(state.tiles[state.map.map[state.player.x - 1][state.player.y]].solid == false){
 				updatedPlayer = state.player;
@@ -33,7 +33,7 @@ document.onkeyup = function(key){
 	if(key.key == "ArrowDown"){
 		if(player.choosenCommand != null){
 			player.choosenCommand(state.mapInfo[state.player.x][state.player.y + 1]);
-			updateMap();
+			//updateMap();
 		}else{
 			if(state.tiles[state.map.map[state.player.x][state.player.y + 1]].solid == false){
 				updatedPlayer = state.player;
@@ -47,7 +47,7 @@ document.onkeyup = function(key){
 	if(key.key == "ArrowUp"){
 		if(player.choosenCommand != null){
 			player.choosenCommand(state.mapInfo[state.player.x][state.player.y - 1]);
-			updateMap();
+			//updateMap();
 		}else{
 			if(state.tiles[state.map.map[state.player.x][state.player.y - 1]].solid == false){
 				updatedPlayer = state.player;
@@ -67,6 +67,11 @@ document.onkeyup = function(key){
 	if(key.key == "t"){
 		player.choosenCommand = player.take;
 		text += "What do you want to take?";
+	}
+
+	if(key.key == "l"){
+		state.player.choosenCommand = state.playerController.look;
+		text += "In which direction are you looking?";
 	}
 
 	drawText(text); //Display resulting text

@@ -22,19 +22,19 @@ var state = {
 		},
 		attack: function (targetTile) {
 			attack(this, targetTile.npc);
-			this.choosenCommand = null;
+			state.player.choosenCommand = null;
 			text = "You attacked!";
 		},
 		take: function (targetTile) {
 			if (targetTile.object != null) {
 				take(this, targetTile.object);
-				this.choosenCommand = null;
+				state.player.choosenCommand = null;
 			}
 		},
 		look: function (targetTile){
 			if (targetTile.object != null) {
 				look(targetTile.object);
-				this.choosenCommand = null;
+				state.player.choosenCommand = null;
 			}
 		}
 	},

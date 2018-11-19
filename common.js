@@ -112,3 +112,11 @@ function take(taker,target){
 	target.x = null;
 	target.y = null;
 }
+
+function look(target){
+	text = state.tiles[target.tile].description;
+	foreground = ROT.Color.toRGB([255,255,255]);
+	background = ROT.Color.toRGB([0,0,0]);
+	colors = "%c{" + foreground + "}%b{" + background + "}";
+	display.drawText(0,19,colors + text);
+}

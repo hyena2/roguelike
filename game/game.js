@@ -31,6 +31,12 @@ var state = {
 				this.choosenCommand = null;
 			}
 		},
+		look: function (targetTile){
+			if (targetTile.object != null) {
+				look(targetTile.object);
+				this.choosenCommand = null;
+			}
+		}
 	},
 	set: function (props, values) {
 		for (var i = 0; i < props.length; i++) {

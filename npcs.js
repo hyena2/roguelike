@@ -16,7 +16,7 @@ var leecher = {
 	},
 	attack: function(){
 		attack(this,player);
-		text += "The leechen attacked you!";
+		text += "The " + this.name + " attacked you!";
 	},
 	think: function(){
 		if(this.alive){

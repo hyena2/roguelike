@@ -32,10 +32,17 @@ var state = {
 			}
 		},
 		look: function (targetTile){
-			if (targetTile.object != null) {
-				look(targetTile.object);
-				state.player.choosenCommand = null;
-			}
+				text = state.tiles[targetTile.tile].description;
+				foreground = ROT.Color.toRGB([255, 255, 255]);
+				background = ROT.Color.toRGB([0, 0, 0]);
+				colors = "%c{" + foreground + "}%b{" + background + "}";
+				state.drawMap();
+				state.playerController.display();
+				display.drawText(0, 19, colors + text);
+				//Reset player
+				templPlayer = state.player;
+				templPlayer.choosenCommand = null;
+				state.set(['player'],[templPlayer]);
 		}
 	},
 	set: function (props, values) {

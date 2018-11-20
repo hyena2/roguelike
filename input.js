@@ -3,7 +3,7 @@ document.onkeyup = function(key){
 	text = ""; //Reset text at the begining of the turn
 
 	if(key.key == "ArrowRight"){
-		if(player.choosenCommand != null){
+		if(state.player.choosenCommand != null){
 			state.player.choosenCommand(state.mapInfo[state.player.x + 1][state.player.y]);
 			//updateMap();
 		}else{
@@ -17,8 +17,8 @@ document.onkeyup = function(key){
 	}
 
 	if(key.key == "ArrowLeft"){
-		if(player.choosenCommand != null){
-			player.choosenCommand(state.mapInfo[state.player.x - 1][state.player.y]);
+		if(state.player.choosenCommand != null){
+			state.player.choosenCommand(state.mapInfo[state.player.x - 1][state.player.y]);
 			//updateMap();
 		}else{
 			if(state.tiles[state.map.map[state.player.x - 1][state.player.y]].solid == false){
@@ -31,8 +31,8 @@ document.onkeyup = function(key){
 	}
 
 	if(key.key == "ArrowDown"){
-		if(player.choosenCommand != null){
-			player.choosenCommand(state.mapInfo[state.player.x][state.player.y + 1]);
+		if(state.player.choosenCommand != null){
+			state.player.choosenCommand(state.mapInfo[state.player.x][state.player.y + 1]);
 			//updateMap();
 		}else{
 			if(state.tiles[state.map.map[state.player.x][state.player.y + 1]].solid == false){
@@ -45,8 +45,8 @@ document.onkeyup = function(key){
 	}
 
 	if(key.key == "ArrowUp"){
-		if(player.choosenCommand != null){
-			player.choosenCommand(state.mapInfo[state.player.x][state.player.y - 1]);
+		if(state.player.choosenCommand != null){
+			state.player.choosenCommand(state.mapInfo[state.player.x][state.player.y - 1]);
 			//updateMap();
 		}else{
 			if(state.tiles[state.map.map[state.player.x][state.player.y - 1]].solid == false){
@@ -60,12 +60,12 @@ document.onkeyup = function(key){
 
 
 	if(key.key == "a"){
-		player.choosenCommand = player.attack;
+		state.player.choosenCommand = state.playerController.attack;
 		text += "In wich direction do you want to attack?";
 	}
 
 	if(key.key == "t"){
-		player.choosenCommand = player.take;
+		state.player.choosenCommand = state.playerController.take;
 		text += "What do you want to take?";
 	}
 

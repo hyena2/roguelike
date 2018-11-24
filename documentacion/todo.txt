@@ -1,0 +1,5 @@
+1- Editor de tiles: sobreescribir tiles con el mismo caracter
+2- Editor de npcs
+3- Editor de objetos
+4- Conexion entre mapas
+5- Conditions to win

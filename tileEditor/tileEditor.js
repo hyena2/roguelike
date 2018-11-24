@@ -59,4 +59,8 @@ saveButton.onclick = function () {
     var updatedTiles = state.tiles;
     updatedTiles.push(newTile);
     state.set(['tiles'],[updatedTiles]);
+    var updatedGame = state.game;
+    updatedGame.tiles = state.tiles;
+    state.set(['game'],[updatedGame]);
+    updateGame('http://localhost:1234/updateGame', state.game.gameName, state.game);
 }

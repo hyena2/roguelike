@@ -30,10 +30,11 @@ var tilesUpdater = {
             tilesNode.removeChild(tilesNode.lastChild);
         }
         state.tiles.map(tile => {
-            newTileNode = "<p>Character: " + tile.character + "<p>" +
-            "<p>Description: " + tile.description + "<p>" + 
-            "<p>Damage: " + tile.damage + "<p>" +
-            "<p>Solid: " + tile.solid + "<p>";
+            newTileNode = '<p>Character: ' + tile.character + '<p>' +
+            '<p>Description: ' + tile.description + '<p>' + 
+            '<p>Damage: ' + tile.damage + '<p>' +
+            '<p>Solid: ' + tile.solid + '<p>'+
+	    '<button class="remove-button" tile="'+ tile.character + '" onclick="removeTile(this)">Remove</button>';
             tilesNode.insertAdjacentHTML('beforeend',newTileNode); //Inserts string as html code
         })
     }
@@ -57,6 +58,10 @@ saveButton.onclick = function () {
     var solid = document.getElementById("solid").checked;
     var newTile = {character : character, description : description, damage : damage, solid : solid};
     var updatedTiles = state.tiles;
+
+    //In case the tile was already defined, filter it in order to update it.
+    updatedTiles = updatedTiles.filter(tile => tile.character != newTile.character);
+
     updatedTiles.push(newTile);
     state.set(['tiles'],[updatedTiles]);
     var updatedGame = state.game;
@@ -64,3 +69,15 @@ saveButton.onclick = function () {
     state.set(['game'],[updatedGame]);
     updateGame('http://localhost:1234/updateGame', state.game.gameName, state.game);
 }
+
+function removeTile(element){
+	var tileCharacter = element.getAttribute("tile");
+	var updatedTiles = state.tiles;
+	updatedTiles = updatedTiles.filter(tile => tile.character != tileCharacter);
+	state.set(['tiles'],[updatedTiles]);
+	var updatedGame = state.game;
+	updatedGame.tiles = state.tiles;
+	state.set(['game'],[updatedGame]);
+	updateGame('http://localhost:1234/updateGame', state.game.gameName, state.game);
+}
+

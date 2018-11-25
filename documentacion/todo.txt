@@ -1,4 +1,4 @@
-1- Editor de tiles: sobreescribir tiles con el mismo caracter
+1- Editor de tiles: sobreescribir tiles con el mismo caracter # DONE
 2- Editor de npcs
 3- Editor de objetos
 4- Conexion entre mapas

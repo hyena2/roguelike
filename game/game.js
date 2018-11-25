@@ -5,6 +5,7 @@ var state = {
 	width: 80,
 	height: 20,
 	tiles: [],
+	npcs : [],
 	player: {
 		character: "@",
 		at: 5,
@@ -45,7 +46,7 @@ var state = {
 				state.set(['player'],[templPlayer]);
 		}
 	},
-	set: function (props, values) {
+	set: function (props, values, computerTurn = false) {
 		for (var i = 0; i < props.length; i++) {
 			if (!typeof values[i] === 'object') { //If the value is an object, copy by value
 				this[props[i]] = values[i];
@@ -54,6 +55,10 @@ var state = {
 			}
 		}
 		this.notify();
+		//If computer turn is true, every npcs is going to act
+		if(computerTurn){
+			npcs.map(npc => npc.act());
+		}
 	},
 	//Observer pattern, this is the observer, for every change in the state, it will call the callback of subcribers
 	notify: function () {

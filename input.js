@@ -7,7 +7,8 @@ document.onkeyup = function(key){
 			state.player.choosenCommand(state.mapInfo[state.player.x + 1][state.player.y]);
 			//updateMap();
 		}else{
-			if(state.tiles[state.map.map[state.player.x + 1][state.player.y]].solid == false){
+			var npcsInTargetPosition = state.mapNpcs.filter(n => n.posX == state.player.x + 1 && n.posY == state.player.y).length > 0 ? true : false;
+			if(state.tiles[state.map.map[state.player.x + 1][state.player.y]].solid == false && !npcsInTargetPosition){
 				updatedPlayer = state.player;
 				updatedPlayer.x++;
 				state.set(['player'],[updatedPlayer],true);
@@ -21,7 +22,8 @@ document.onkeyup = function(key){
 			state.player.choosenCommand(state.mapInfo[state.player.x - 1][state.player.y]);
 			//updateMap();
 		}else{
-			if(state.tiles[state.map.map[state.player.x - 1][state.player.y]].solid == false){
+			var npcsInTargetPosition = state.mapNpcs.filter(n => n.posX == state.player.x - 1 && n.posY == state.player.y).length > 0 ? true : false;
+			if(state.tiles[state.map.map[state.player.x - 1][state.player.y]].solid == false && !npcsInTargetPosition){
 				updatedPlayer = state.player;
 				updatedPlayer.x--;
 				state.set(['player'],[updatedPlayer],true);
@@ -35,7 +37,8 @@ document.onkeyup = function(key){
 			state.player.choosenCommand(state.mapInfo[state.player.x][state.player.y + 1]);
 			//updateMap();
 		}else{
-			if(state.tiles[state.map.map[state.player.x][state.player.y + 1]].solid == false){
+			var npcsInTargetPosition = state.mapNpcs.filter(n => n.posY == state.player.y + 1 && n.posX == state.player.x).length > 0 ? true : false;
+			if(state.tiles[state.map.map[state.player.x][state.player.y + 1]].solid == false && !npcsInTargetPosition){
 				updatedPlayer = state.player;
 				updatedPlayer.y++;
 				state.set(['player'],[updatedPlayer],true);
@@ -49,7 +52,8 @@ document.onkeyup = function(key){
 			state.player.choosenCommand(state.mapInfo[state.player.x][state.player.y - 1]);
 			//updateMap();
 		}else{
-			if(state.tiles[state.map.map[state.player.x][state.player.y - 1]].solid == false){
+			var npcsInTargetPosition = state.mapNpcs.filter(n => n.posY == state.player.y - 1 && n.posX == state.player.x).length > 0 ? true : false;
+			if(state.tiles[state.map.map[state.player.x][state.player.y - 1]].solid == false && !npcsInTargetPosition){
 				updatedPlayer = state.player;
 				updatedPlayer.y--;
 				state.set(['player'],[updatedPlayer],true);

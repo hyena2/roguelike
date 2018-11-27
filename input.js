@@ -10,7 +10,7 @@ document.onkeyup = function(key){
 			if(state.tiles[state.map.map[state.player.x + 1][state.player.y]].solid == false){
 				updatedPlayer = state.player;
 				updatedPlayer.x++;
-				state.set(['player'],[updatedPlayer]);
+				state.set(['player'],[updatedPlayer],true);
 				text += "You moved to the East.";
 			}
 		}
@@ -24,7 +24,7 @@ document.onkeyup = function(key){
 			if(state.tiles[state.map.map[state.player.x - 1][state.player.y]].solid == false){
 				updatedPlayer = state.player;
 				updatedPlayer.x--;
-				state.set(['player'],[updatedPlayer]);
+				state.set(['player'],[updatedPlayer],true);
 				text += "You moved to the West.";
 			}
 		}
@@ -38,7 +38,7 @@ document.onkeyup = function(key){
 			if(state.tiles[state.map.map[state.player.x][state.player.y + 1]].solid == false){
 				updatedPlayer = state.player;
 				updatedPlayer.y++;
-				state.set(['player'],[updatedPlayer]);
+				state.set(['player'],[updatedPlayer],true);
 				text += "You moved to the South.";
 			}
 		}
@@ -52,7 +52,7 @@ document.onkeyup = function(key){
 			if(state.tiles[state.map.map[state.player.x][state.player.y - 1]].solid == false){
 				updatedPlayer = state.player;
 				updatedPlayer.y--;
-				state.set(['player'],[updatedPlayer]);
+				state.set(['player'],[updatedPlayer],true);
 				text += "You moved to the North.";
 			}
 		}

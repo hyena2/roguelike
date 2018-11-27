@@ -1,7 +1,7 @@
 var state = {
 	game: {},
 	map: null,
-	mapInfo: [],
+	mapNpcs: [],
 	width: 80,
 	height: 20,
 	tiles: [],
@@ -24,7 +24,7 @@ var state = {
 		attack: function (targetTile) {
 			attack(this, targetTile.npc);
 			state.player.choosenCommand = null;
-			text = "You attacked!";
+			text = "You attacked!"
 		},
 		take: function (targetTile) {
 			if (targetTile.object != null) {
@@ -33,17 +33,23 @@ var state = {
 			}
 		},
 		look: function (targetTile){
-				text = state.tiles[targetTile.tile].description;
-				foreground = ROT.Color.toRGB([255, 255, 255]);
-				background = ROT.Color.toRGB([0, 0, 0]);
-				colors = "%c{" + foreground + "}%b{" + background + "}";
-				state.drawMap();
-				state.playerController.display();
-				display.drawText(0, 19, colors + text);
-				//Reset player
-				templPlayer = state.player;
-				templPlayer.choosenCommand = null;
-				state.set(['player'],[templPlayer]);
+			text = state.tiles[targetTile.tile].description;
+			foreground = ROT.Color.toRGB([255, 255, 255]);
+			background = ROT.Color.toRGB([0, 0, 0]);
+			colors = "%c{" + foreground + "}%b{" + background + "}";
+			state.drawMap();
+			state.drawNpcs();
+			state.playerController.display();
+			display.drawText(0, 19, colors + text);
+			//Reset player
+			templPlayer = state.player;
+			templPlayer.choosenCommand = null;
+			state.set(['player'],[templPlayer]);
+		}
+	},
+	npcController : {
+		control: function (npc) {
+			npcUtils.moveNpc(npc);
 		}
 	},
 	set: function (props, values, computerTurn = false) {
@@ -57,7 +63,9 @@ var state = {
 		this.notify();
 		//If computer turn is true, every npcs is going to act
 		if(computerTurn){
-			npcs.map(npc => npc.act());
+			for(var i = 0; i < state.mapNpcs.length; i++){
+				state.npcController.control(state.mapNpcs[i]);
+			}
 		}
 	},
 	//Observer pattern, this is the observer, for every change in the state, it will call the callback of subcribers
@@ -79,43 +87,57 @@ var state = {
 				display.drawText(i, j, colors + state.map['map'][i][j]);
 			}
 		}
+	},
+	drawNpcs: function () {
+		for(var i = 0; i < state.mapNpcs.length; i++){
+			foreground = ROT.Color.toRGB([255, 255, 255]);
+			background = ROT.Color.toRGB([0, 0, 0]);
+			colors = "%c{" + foreground + "}%b{" + background + "}";
+			display.drawText(state.mapNpcs[i].posX,state.mapNpcs[i].posY,colors + state.mapNpcs[i].character);
+		}
 	}
 }
 
 //Event
 window.onload = function () {
 	loadGame('http://localhost:1234/getGame', "test", (response) => {
-		state.set(['game'], [JSON.parse(response)[0]]) //Even we only want one element the back returns an array, 
-		state.set(['map'], [state.game.maps[0]]);
-		//Fill map info
-		tempMapInfo = [];
-		for (var i = 0; i < state.map.map.length; i++) {
-			tempMapInfo[i] = [];
-			for (var j = 0; j < state.map.map[i].length; j++) {
-				tempMapInfo[i][j] = {
-					tile: state.map.map[i][j],
-					npc: null,
-					object: null,
+			state.set(['game'], [JSON.parse(response)[0]]) //Even we only want one element the back returns an array, 
+			state.set(['map'], [state.game.maps[0]]);
+			//Initialize tiles
+			state.game.tiles.map(tile => {
+				state.tiles[tile.character] = { solid: tile.solid, description: tile.description };
+			})
+			//Initialize npcs
+			state.game.npcs.map(npc => {
+				state.npcs[npc.character] = {character: npc.character, attack: npc.attack, description: npc.description, defense: npc.defense };
+			})
+			//Fill map info
+			for (var i = 0; i < state.map.map.length; i++) {
+				for (var j = 0; j < state.map.map[i].length; j++) {
+					if(state.npcs[state.map.map[i][j]] != undefined){ //If this tile is defined as an npc push it to the npcs
+						var npc = Object.assign({},state.npcs[state.map.map[i][j]]);
+						npc.posX = i;
+						npc.posY = j;
+						state.mapNpcs.push(npc);
+					}
 				}
 			}
-		}
-		state.set(['mapInfo'], [tempMapInfo]);
-		state.game.tiles.map(tile => {
-			state.tiles[tile.character] = { solid: tile.solid, description: tile.description };
-		})
-		state.drawMap();
-		state.playerController.display();
-	});
-	document.body.appendChild(container);
+			state.drawMap();
+			state.drawNpcs();
+			state.playerController.display();
+});
+document.body.appendChild(container);
 }
 
 var playerRenderer = {
 	callback: function () {
 		if (state.map != null) { //Check because of the first call
 			state.drawMap();
+			state.drawNpcs();
+			state.playerController.display();
 		}
-		state.playerController.display();
 	}
 }
+
 state.subscribe(playerRenderer);
 

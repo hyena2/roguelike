@@ -66,6 +66,7 @@ var state = {
 			for(var i = 0; i < state.mapNpcs.length; i++){
 				state.npcController.control(state.mapNpcs[i]);
 			}
+			state.drawNpcs();
 		}
 	},
 	//Observer pattern, this is the observer, for every change in the state, it will call the callback of subcribers
@@ -133,7 +134,6 @@ var playerRenderer = {
 	callback: function () {
 		if (state.map != null) { //Check because of the first call
 			state.drawMap();
-			state.drawNpcs();
 			state.playerController.display();
 		}
 	}

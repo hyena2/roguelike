@@ -44,8 +44,8 @@ window.onload = function () {
     state.subscribe(tilesUpdater);
 	loadGame('http://localhost:1234/getGame',"test",(response) => {
             state.set(['game'],[JSON.parse(response)[0]]);
-            state.set(['tiles'],[state.game.tiles]);
             delete state.game._id;
+            state.set(['tiles'],[state.game.tiles]);
     });
 }
 

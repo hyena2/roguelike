@@ -44,8 +44,8 @@ window.onload = function () {
 	state.subscribe(npcsUpdater);
 	loadGame('http://localhost:1234/getGame',"test",(response) => {
 			state.set(['game'],[JSON.parse(response)[0]]);
-			state.set(['npcs'],[state.game.npcs]);
 			delete state.game._id;
+			state.set(['npcs'],[state.game.npcs]);
 			});
 }
 

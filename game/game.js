@@ -107,38 +107,52 @@ var state = {
 			colors = "%c{" + foreground + "}%b{" + background + "}";
 			display.drawText(state.mapNpcs[i].posX,state.mapNpcs[i].posY,colors + state.mapNpcs[i].character);
 		}
-	}
+	},
+	calculateNpcTile: function (x, y) {
+		var nearestTiles = [];
+		for (var i = -1; i < 1; i++) {
+			for (var j = -1; j < 1; j++) {
+				if (i == 0 && j == 0) {
+					break;
+				} else {
+					nearestTiles.push(state.map.map[x + i][y + j]);
+				}
+			}
+		}
+		return mode(nearestTiles);
+	},
 }
 
 //Event
 window.onload = function () {
 	loadGame('http://localhost:1234/getGame', "test", (response) => {
-			state.set(['game'], [JSON.parse(response)[0]]) //Even we only want one element the back returns an array, 
-			state.set(['map'], [state.game.maps[0]]);
-			//Initialize tiles
-			state.game.tiles.map(tile => {
-				state.tiles[tile.character] = { solid: tile.solid, description: tile.description };
-			})
-			//Initialize npcs
-			state.game.npcs.map(npc => {
-				state.npcs[npc.character] = {character: npc.character, attack: npc.attack, description: npc.description, defense: npc.defense, hp : npc.hp };
-			})
-			//Fill map info
-			for (var i = 0; i < state.map.map.length; i++) {
-				for (var j = 0; j < state.map.map[i].length; j++) {
-					if(state.npcs[state.map.map[i][j]] != undefined){ //If this tile is defined as an npc push it to the npcs
-						var npc = Object.assign({},state.npcs[state.map.map[i][j]]);
-						npc.posX = i;
-						npc.posY = j;
-						state.mapNpcs.push(npc);
-					}
+		state.set(['game'], [JSON.parse(response)[0]]) //Even we only want one element the back returns an array, 
+		state.set(['map'], [state.game.maps[0]]);
+		//Initialize tiles
+		state.game.tiles.map(tile => {
+			state.tiles[tile.character] = { solid: tile.solid, description: tile.description };
+		})
+		//Initialize npcs
+		state.game.npcs.map(npc => {
+			state.npcs[npc.character] = { character: npc.character, attack: npc.attack, description: npc.description, defense: npc.defense, hp: npc.hp };
+		})
+		//Fill map info
+		for (var i = 0; i < state.map.map.length; i++) {
+			for (var j = 0; j < state.map.map[i].length; j++) {
+				if (state.npcs[state.map.map[i][j]] != undefined) { //If this tile is defined as an npc push it to the npcs
+					var npc = Object.assign({}, state.npcs[state.map.map[i][j]]);
+					npc.posX = i;
+					npc.posY = j;
+					state.mapNpcs.push(npc);
+					state.map.map[i][j] = state.calculateNpcTile(i, j);
 				}
 			}
-			state.drawMap();
-			state.drawNpcs();
-			state.playerController.display();
-});
-document.body.appendChild(container);
+		}
+		state.drawMap();
+		state.drawNpcs();
+		state.playerController.display();
+	});
+	document.body.appendChild(container);
 }
 
 var playerRenderer = {

@@ -4,7 +4,9 @@ document.onkeyup = function(key){
 
 	if(key.key == "ArrowRight"){
 		if(state.player.choosenCommand != null){
-			state.player.choosenCommand(state.mapInfo[state.player.x + 1][state.player.y]);
+			var npc = state.mapNpcs.filter(n => n.posX == state.player.x + 1 && n.posY == state.player.y);
+			npc = npc.length == 1 ? npc[0] : null; //If the filtering is succesfull (because there is an npc) get it, otherwise set it to null 
+			state.player.choosenCommand(state.map.map[state.player.x + 1][state.player.y],npc);
 			//updateMap();
 		}else{
 			var npcsInTargetPosition = state.mapNpcs.filter(n => n.posX == state.player.x + 1 && n.posY == state.player.y).length > 0 ? true : false;
@@ -19,7 +21,9 @@ document.onkeyup = function(key){
 
 	if(key.key == "ArrowLeft"){
 		if(state.player.choosenCommand != null){
-			state.player.choosenCommand(state.mapInfo[state.player.x - 1][state.player.y]);
+			var npc = state.mapNpcs.filter(n => n.posX == state.player.x - 1 && n.posY == state.player.y);
+			npc = npc.length == 1 ? npc[0] : null; //If the filtering is succesfull (because there is an npc) get it, otherwise set it to null 
+			state.player.choosenCommand(state.map.map[state.player.x - 1][state.player.y],npc);
 			//updateMap();
 		}else{
 			var npcsInTargetPosition = state.mapNpcs.filter(n => n.posX == state.player.x - 1 && n.posY == state.player.y).length > 0 ? true : false;
@@ -34,7 +38,9 @@ document.onkeyup = function(key){
 
 	if(key.key == "ArrowDown"){
 		if(state.player.choosenCommand != null){
-			state.player.choosenCommand(state.mapInfo[state.player.x][state.player.y + 1]);
+			var npc = state.mapNpcs.filter(n => n.posX == state.player.x && n.posY == state.player.y + 1);
+			npc = npc.length == 1 ? npc[0] : null; //If the filtering is succesfull (because there is an npc) get it, otherwise set it to null 
+			state.player.choosenCommand(state.map.map[state.player.x][state.player.y + 1],npc);
 			//updateMap();
 		}else{
 			var npcsInTargetPosition = state.mapNpcs.filter(n => n.posY == state.player.y + 1 && n.posX == state.player.x).length > 0 ? true : false;
@@ -49,7 +55,9 @@ document.onkeyup = function(key){
 
 	if(key.key == "ArrowUp"){
 		if(state.player.choosenCommand != null){
-			state.player.choosenCommand(state.mapInfo[state.player.x][state.player.y - 1]);
+			var npc = state.mapNpcs.filter(n => n.posX == state.player.x && n.posY == state.player.y - 1);
+			npc = npc.length == 1 ? npc[0] : null; //If the filtering is succesfull (because there is an npc) get it, otherwise set it to null 
+			state.player.choosenCommand(state.map.map[state.player.x][state.player.y - 1],npc);
 			//updateMap();
 		}else{
 			var npcsInTargetPosition = state.mapNpcs.filter(n => n.posY == state.player.y - 1 && n.posX == state.player.x).length > 0 ? true : false;

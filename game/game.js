@@ -21,19 +21,19 @@ var state = {
 		display: function () {
 			displayEntity(state.player);
 		},
-		attack: function (targetTile) {
+		attack: function (targetTile,npc) {
 			attack(this, targetTile.npc);
 			state.player.choosenCommand = null;
 			text = "You attacked!"
 		},
-		take: function (targetTile) {
+		take: function (targetTile,npc) {
 			if (targetTile.object != null) {
 				take(this, targetTile.object);
 				state.player.choosenCommand = null;
 			}
 		},
-		look: function (targetTile){
-			text = state.tiles[targetTile.tile].description;
+		look: function (targetTile,npc){
+			text = state.tiles[targetTile].description;
 			foreground = ROT.Color.toRGB([255, 255, 255]);
 			background = ROT.Color.toRGB([0, 0, 0]);
 			colors = "%c{" + foreground + "}%b{" + background + "}";
@@ -44,7 +44,14 @@ var state = {
 			//Reset player
 			templPlayer = state.player;
 			templPlayer.choosenCommand = null;
-			state.set(['player'],[templPlayer]);
+			state.set(['player'],[templPlayer],true);
+		},
+		attack: function (targetTile,npc){
+			npc.hp--; //TODO change this, insert combat system
+			console.log(npc);
+			templPlayer = state.player;
+			templPlayer.choosenCommand = null;
+			state.set(['player'],[templPlayer],true);
 		}
 	},
 	npcController : {

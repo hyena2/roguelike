@@ -34,6 +34,7 @@ var npcsUpdater = {
 				'<p>Description: ' + npc.description + '<p>' + 
 				'<p>Attack: ' + npc.attack + '<p>' +
 				'<p>Defense: ' + npc.defense + '<p>'+
+				'<p>Hp: ' + npc.hp + '<p>'+
 				'<button class="remove-button" npc="'+ npc.character + '" onclick="removeNpc(this)">Remove</button>';
 			npcsNode.insertAdjacentHTML('beforeend',newNpcNode); //Inserts string as html code})
 		});
@@ -54,13 +55,14 @@ var saveButton = document.getElementById("save");
 saveButton.onclick = function () {
 	var character = document.getElementById("character").value;
 	var description = document.getElementById("description").value;
-	var attack = document.getElementById("attack").checked;
-	var defense = document.getElementById("defense").checked;
-	var newNpc = {character : character, description : description, attack : attack, defense : defense};
+	var attack = document.getElementById("attack").value;
+	var defense = document.getElementById("defense").value;
+	var hp = document.getElementById("hp").value;
+	var newNpc = {character : character, description : description, attack : attack, defense : defense, hp : hp};
 	var updatedNpcs = state.npcs;
 
 	//In case the tile was already defined, filter it in order to update it.
-	updatedNpcs = updatedNpcs.filter(npc => npc.character != newTile.character);
+	updatedNpcs = updatedNpcs.filter(npc => npc.character != newNpc.character);
 
 	updatedNpcs.push(newNpc);
 	state.set(['npcs'],[updatedNpcs]);

@@ -49,6 +49,10 @@ var state = {
 		attack: function (targetTile,npc){
 			npc.hp--; //TODO change this, insert combat system
 			console.log(npc);
+			if(npc.hp <= 0){
+				//Make the npc dissapear
+				state.mapNpcs = state.mapNpcs.filter(n => n != npc);
+			}
 			templPlayer = state.player;
 			templPlayer.choosenCommand = null;
 			state.set(['player'],[templPlayer],true);
@@ -117,7 +121,7 @@ window.onload = function () {
 			})
 			//Initialize npcs
 			state.game.npcs.map(npc => {
-				state.npcs[npc.character] = {character: npc.character, attack: npc.attack, description: npc.description, defense: npc.defense };
+				state.npcs[npc.character] = {character: npc.character, attack: npc.attack, description: npc.description, defense: npc.defense, hp : npc.hp };
 			})
 			//Fill map info
 			for (var i = 0; i < state.map.map.length; i++) {

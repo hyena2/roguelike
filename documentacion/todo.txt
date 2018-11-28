@@ -1,5 +1,11 @@
 1- Editor de tiles: sobreescribir tiles con el mismo caracter # DONE
-2- Editor de npcs
+2- Editor de npcs #DONE
 3- Editor de objetos
 4- Conexion entre mapas
 5- Conditions to win
+
+
+//TODO PARA PRIMER PROTOTYPE
+1- Que desaparezca las tiles donde empiezan los personajes
+2- Ataque de los npcs al jugador
+3- Winning condition 

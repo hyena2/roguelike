@@ -61,6 +61,9 @@ var state = {
 	npcController : {
 		control: function (npc) {
 			npcUtils.moveNpc(npc);
+			if(npcUtils.isPlayerAround(npc)){
+				console.log("around!");
+			}
 		}
 	},
 	set: function (props, values, computerTurn = false) {
@@ -108,10 +111,11 @@ var state = {
 			display.drawText(state.mapNpcs[i].posX,state.mapNpcs[i].posY,colors + state.mapNpcs[i].character);
 		}
 	},
+	// Calculates the most common tile next to the npc to change the initial tile for it. Make it look only no-solid tiles!
 	calculateNpcTile: function (x, y) {
 		var nearestTiles = [];
-		for (var i = -1; i < 1; i++) {
-			for (var j = -1; j < 1; j++) {
+		for (var i = -1; i < 2; i++) {
+			for (var j = -1; j < 2; j++) {
 				if (i == 0 && j == 0) {
 					break;
 				} else {
@@ -119,7 +123,9 @@ var state = {
 				}
 			}
 		}
-		return mode(nearestTiles);
+		// Array with most common elements in descent order
+		mode = mode(nearestTiles);
+		return mode[0]
 	},
 }
 

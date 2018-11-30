@@ -43,5 +43,15 @@ npcUtils = {
 					break;
 				}
 		}
-	}
+	},
+	isPlayerAround: function(npc){
+		if((npc.posX == state.player.x - 1 && npc.posY == state.player.y )|| 
+		   (npc.posX == state.player.x + 1 && npc.posY == state.player.y)|| 
+		   (npc.posY == state.player.y - 1 && npc.posX == state.player.x)|| 
+		   (npc.posY == state.player.y + 1 && npc.posY == state.player.x)){
+			return true;
+		}else{
+			return false;
+		}
+	},
 }

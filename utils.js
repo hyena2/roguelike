@@ -34,7 +34,7 @@ function mode(numbers) {
     for (i in count)
         if (count.hasOwnProperty(i)) {
             if (count[i] === maxIndex) {
-                modes.push(Number(i));
+                modes.push(i);
             }
         }
  

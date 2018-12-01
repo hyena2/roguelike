@@ -6,6 +6,7 @@ var state = {
 	height: 20,
 	tiles: [],
 	npcs : [],
+	text : "",
 	player: {
 		character: "@",
 		at: 5,
@@ -20,11 +21,6 @@ var state = {
 	playerController: {
 		display: function () {
 			displayEntity(state.player);
-		},
-		attack: function (targetTile,npc) {
-			attack(this, targetTile.npc);
-			state.player.choosenCommand = null;
-			text = "You attacked!"
 		},
 		take: function (targetTile,npc) {
 			if (targetTile.object != null) {
@@ -55,6 +51,7 @@ var state = {
 			}
 			templPlayer = state.player;
 			templPlayer.choosenCommand = null;
+			state.set(['text'],["You attacked the " + npc.description]);
 			state.set(['player'],[templPlayer],true);
 		}
 	},
@@ -75,12 +72,14 @@ var state = {
 			}
 		}
 		this.notify();
-		//If computer turn is true, every npcs is going to act
+		//If computer turn is true, every npcs is going to act and the text is going to "flush"
 		if(computerTurn){
 			for(var i = 0; i < state.mapNpcs.length; i++){
 				state.npcController.control(state.mapNpcs[i]);
 			}
 			state.drawNpcs();
+			state.drawText();
+			state.resetText();
 		}
 	},
 	//Observer pattern, this is the observer, for every change in the state, it will call the callback of subcribers
@@ -127,6 +126,12 @@ var state = {
 		mode = mode(nearestTiles);
 		return mode[0]
 	},
+	drawText : function(){
+		display.drawText(0,19,colors + state.text);
+	},
+	resetText : function(){
+		state.text = "";
+	}
 }
 
 //Event
@@ -142,7 +147,7 @@ window.onload = function () {
 		state.game.npcs.map(npc => {
 			state.npcs[npc.character] = { character: npc.character, attack: npc.attack, description: npc.description, defense: npc.defense, hp: npc.hp };
 		})
-		//Fill map info
+		//Initialize mapNpcs and replace tiles of initial npcs position
 		for (var i = 0; i < state.map.map.length; i++) {
 			for (var j = 0; j < state.map.map[i].length; j++) {
 				if (state.npcs[state.map.map[i][j]] != undefined) { //If this tile is defined as an npc push it to the npcs

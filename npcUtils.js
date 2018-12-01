@@ -43,6 +43,7 @@ npcUtils = {
 					break;
 				}
 		}
+		var stateText = state.text;
 	},
 	isPlayerAround: function(npc){
 		if((npc.posX == state.player.x - 1 && npc.posY == state.player.y )|| 

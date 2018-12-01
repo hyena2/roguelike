@@ -123,8 +123,8 @@ var state = {
 			}
 		}
 		// Array with most common elements in descent order
-		mode = mode(nearestTiles);
-		return mode[0]
+		modeArray = mode(nearestTiles);
+		return modeArray[0]
 	},
 	drawText : function(){
 		display.drawText(0,19,colors + state.text);

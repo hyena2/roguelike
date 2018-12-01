@@ -8,4 +8,4 @@
 1- Que desaparezca las tiles donde empiezan los personajes #DONE
 2- Ataque de los npcs al jugador
 3- Winning condition 
-4 - Cambiar logica de enseñar texto, debe haber un buffer de texto que se flushee al final del turno.
+4 - Cambiar logica de enseñar texto, debe haber un buffer de texto que se flushee al final del turno. #DONE

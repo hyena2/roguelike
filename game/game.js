@@ -52,6 +52,7 @@ var state = {
 			templPlayer = state.player;
 			templPlayer.choosenCommand = null;
 			state.set(['text'],["You attacked the " + npc.description]);
+			winnerChecker.checkLastAction("attack",npc);
 			state.set(['player'],[templPlayer],true);
 		}
 	},
@@ -116,8 +117,10 @@ var state = {
 		for (var i = -1; i < 2; i++) {
 			for (var j = -1; j < 2; j++) {
 				if (i == 0 && j == 0) {
-					break;
+					// This is the tile that we want to replace
 				} else {
+					//Check that the tile is in the map and solid
+					if(x + i >= 0 && x + i <= state.width && y + j >= 0 && y + j <= state.height && state.tiles[state.map.map[x + i][y + j]].solid == false)
 					nearestTiles.push(state.map.map[x + i][y + j]);
 				}
 			}
@@ -175,5 +178,21 @@ var playerRenderer = {
 	}
 }
 
+var winnerChecker = {
+	callback: function () {
+		if(state.game.winningCondition.length == 0){
+			console.log("game done!");
+		}
+	},
+	checkLastAction: function(action,target){
+		if(action == "attack"){
+			var updatedGame = state.game;
+			updatedGame.winningCondition = updatedGame.winningCondition.filter(c => c != action + " " + target.character);
+			state.set(['game'],[updatedGame]);
+		}
+	}
+}
+
 state.subscribe(playerRenderer);
+state.subscribe(winnerChecker);
 

@@ -55,4 +55,8 @@ npcUtils = {
 			return false;
 		}
 	},
+	attack: function(npc,target){
+		target.hp -= npc.attack;
+		state.text += npc.description + " attacked you. "
+	},
 }

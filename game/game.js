@@ -37,7 +37,7 @@ var state = {
 			state.drawNpcs();
 			state.playerController.display();
 			display.drawText(0, 19, colors + text);
-			//Reset player
+			//Reset player command
 			templPlayer = state.player;
 			templPlayer.choosenCommand = null;
 			state.set(['player'],[templPlayer],true);
@@ -51,16 +51,17 @@ var state = {
 			}
 			templPlayer = state.player;
 			templPlayer.choosenCommand = null;
-			state.set(['text'],["You attacked the " + npc.description]);
+			state.set(['text'],["You attacked the " + npc.description + ". "]);
 			winnerChecker.checkLastAction("attack",npc);
 			state.set(['player'],[templPlayer],true);
 		}
 	},
 	npcController : {
 		control: function (npc) {
-			npcUtils.moveNpc(npc);
 			if(npcUtils.isPlayerAround(npc)){
-				console.log("around!");
+				npcUtils.attack(npc,state.player);
+			}else{
+				npcUtils.moveNpc(npc);
 			}
 		}
 	},

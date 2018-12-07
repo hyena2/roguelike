@@ -2,7 +2,8 @@
 2- Editor de npcs #DONE
 3- Editor de objetos
 4- Conexion entre mapas
-5- Conditions to win
+5- Conditions to win #DONE 
+6 - Add tile color
 
 //TODO PARA PRIMER PROTOTYPE
 1- Que desaparezca las tiles donde empiezan los personajes #DONE

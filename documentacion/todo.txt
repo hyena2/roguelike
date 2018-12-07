@@ -4,6 +4,10 @@
 4- Conexion entre mapas
 5- Conditions to win #DONE 
 6 - Add tile color
+7 - Add doors
+8- Move player.js to game.js (?)
+9 - Add inventory
+10 - Add users
 
 //TODO PARA PRIMER PROTOTYPE
 1- Que desaparezca las tiles donde empiezan los personajes #DONE

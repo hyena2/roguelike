@@ -19,10 +19,21 @@ function updateGame(url,gameName,game){
     xhttp.send(JSON.stringify(game));
 }
 
+function login(url, name, password) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        console.log(xhttp.response);
+        document.cookie = xhttp.response;
+    }
+    xhttp.open("POST", url + "/login", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify({ name: name, password: password }));
+}
+
 //Calculates the most common element in array
 function mode(numbers) {
     var modes = [], count = [], i, number, maxIndex = 0;
- 
+
     for (i = 0; i < numbers.length; i += 1) {
         number = numbers[i];
         count[number] = (count[number] || 0) + 1;
@@ -30,13 +41,13 @@ function mode(numbers) {
             maxIndex = count[number];
         }
     }
- 
+
     for (i in count)
         if (count.hasOwnProperty(i)) {
             if (count[i] === maxIndex) {
                 modes.push(i);
             }
         }
- 
+
     return modes;
 }

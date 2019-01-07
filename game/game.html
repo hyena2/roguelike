@@ -3,20 +3,15 @@
 <link rel="stylesheet" type="text/css" href="../styles/common.css">
 </head>
 <body>
-<nav>
-<a href="../mapEditor/mapEditor.html">Maps</a>
-<a href="">Player</a>
-<a href="../npcEditor/npcEditor.html">Npcs</a>
-<a href="">Objects</a>
-<a href="../tileEditor/tileEditor.html">Tiles</a>
-<a href="../game/game.html">Game</a>
-</nav>
-<script src="../rot.js"></script>
-<script src="../utils.js"></script>
-<script src="../common.js"></script>
-<script src="player.js"></script>
-<script src="../input.js"></script>
-<script src="../npcUtils.js"></script>
-<script src="game.js"></script>
+	<label for="file">Import game</label>
+	<input class="inputfile" id="file" type='file' accept='text/plain' onchange='openFile(event)'><br>
+
+	<script src="../rot.js"></script>
+	<script src="../utils.js"></script>
+	<script src="../common.js"></script>
+	<script src="game.js"></script>
+	<script src="player.js"></script>
+	<script src="../input.js"></script>
+	<script src="../npcUtils.js"></script>
 </body>
 </html>

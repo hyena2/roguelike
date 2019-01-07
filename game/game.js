@@ -138,10 +138,13 @@ var state = {
 	}
 }
 
-//Event
-window.onload = function () {
-	loadGame('http://localhost:1234/getGame', "test", (response) => {
-		state.set(['game'], [JSON.parse(response)[0]]) //Even we only want one element the back returns an array, 
+function openFile(event) {
+	var input = event.target;
+	var reader = new FileReader();
+	reader.onload = function(){
+		//callback, called after file readed
+		var text = reader.result;
+		state.set(['game'],[JSON.parse(text)]);
 		state.set(['map'], [state.game.maps[0]]);
 		//Initialize tiles
 		state.game.tiles.map(tile => {
@@ -166,9 +169,10 @@ window.onload = function () {
 		state.drawMap();
 		state.drawNpcs();
 		state.playerController.display();
-	});
+	}
 	document.body.appendChild(container);
-}
+	reader.readAsText(input.files[0]);
+};
 
 var playerRenderer = {
 	callback: function () {

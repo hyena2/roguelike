@@ -1,0 +1,29 @@
+.npc-input-number{
+	width:20px;
+}
+
+.npc p{
+	display:inline;
+	margin-right:10px;
+	margin-bottom:0px;
+}
+
+.npc p::after{
+	content: ' |';
+}
+
+
+/*remove arrow from input number textbox*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+.npcs-header{
+	margin-bottom:5px;
+	text-decoration:underline;
+}

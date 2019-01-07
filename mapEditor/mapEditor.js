@@ -1,43 +1,3 @@
-var state = {
-	mapWidth: 80,
-	mapHeight: 20,
-	map : { mapName : "", map : null},
-	previousEditorPos : [0,0],
-	currentEditorPos : [0,0],
-	game : {},
-	gameMaps: null,
-	drawMap : function(){
-		for (var i = 0; i < this.map['map'].length; i++) {
-			for (var j = 0; j < this.map['map'][i].length; j++) {
-				foreground = ROT.Color.toRGB([255, 255, 255]);
-				background = ROT.Color.toRGB([0, 0, 0]);
-				colors = "%c{" + foreground + "}%b{" + background + "}";
-				display.drawText(i, j, colors + state.map['map'][i][j]);
-			}
-		}
-	},
-	set: function (props, values) {
-		for (var i = 0; i < props.length; i++) {
-			if (!typeof values[i] === 'object') { //If the value is an object, copy by value
-				this[props[i]] = values[i];
-			} else {
-				this[props[i]] = JSON.parse(JSON.stringify(values[i])); //Copy by value, this makes a copy of an object not a reference
-			}
-		}
-		this.notify();
-	},
-	//Observer pattern, this is the observer, for every change in the state, it will call the callback of subcribers
-	notify: function () {
-		for (var i = 0; i < this.subscribers.length; i++) {
-			this.subscribers[i].callback(this);
-		}
-	},
-	subscribe: function (subscriber) {
-		this.subscribers.push(subscriber);
-	},
-	subscribers: [],
-}
-
 state.map.map = [];
 for (var i = 0; i < state.mapWidth; i++) {
 	state.map.map[i] = [];
@@ -87,37 +47,26 @@ var gameMapsUpdate = {
 	}
 }
 
-//Event
-window.onload = function () {
-
-	document.body.appendChild(container);
-	state.subscribe(mapUpdater);
-	state.subscribe(editorPosHandler);
-	state.subscribe(gameMapsUpdate);
-
-	loadGame('http://localhost:1234/getGame', "test", (response) => {
-		state.set(['game'], [JSON.parse(response)[0]]) //Even we only want one element the back returns an array, 
-		delete state.game._id; //Delete the _id property so mongodb can update the object without problems
-	});
-
-	state.drawMap();
-}
 
 //Event
-window.onkeyup = function (e) {
+window.onkeydown = function (e) {
 	if (e.key == "ArrowDown") {
+		e.preventDefault();
 		state.set(['previousEditorPos'], [state.currentEditorPos]);
 		state.set(['currentEditorPos'], [[state.currentEditorPos[0], state.currentEditorPos[1] + 1]]);
 	}
 	else if (e.key == "ArrowUp") {
+		e.preventDefault();
 		state.set(['previousEditorPos'], [state.currentEditorPos]);
 		state.set(['currentEditorPos'], [[state.currentEditorPos[0], state.currentEditorPos[1] - 1]]);
 	}
 	else if (e.key == "ArrowRight") {
+		e.preventDefault();
 		state.set(['previousEditorPos'], [state.currentEditorPos]);
 		state.set(['currentEditorPos'], [[state.currentEditorPos[0] + 1, state.currentEditorPos[1]]]);
 	}
 	else if (e.key == "ArrowLeft") {
+		e.preventDefault();
 		state.set(['previousEditorPos'], [state.currentEditorPos]);
 		state.set(['currentEditorPos'], [[state.currentEditorPos[0] - 1, state.currentEditorPos[1]]]);
 	}
@@ -131,7 +80,7 @@ window.onkeyup = function (e) {
 }
 
 //Event
-var saveMap = document.getElementById("saveMap");
+var saveMap = document.getElementById("map-save");
 saveMap.onclick = function () {
 	//Set the map name
 	var mapName = document.getElementById("mapName").value;
@@ -152,9 +101,7 @@ saveMap.onclick = function () {
 		updatedGame.maps.push(state.map);
 	}
 
-	state.set(['game'], [updatedGame]); //FIX, updatedGame and state.game are THE SAME object, so this step
-	// is not needed, but thats wrong! change it.
-	updateGame('http://localhost:1234/updateGame', state.game.gameName, state.game);
+	state.set(['game'], [updatedGame]);
 }
 
 

@@ -16,6 +16,7 @@ function updateGame(url,gameName,game){
     }
     xhttp.open("PUT", url +"/" + gameName, true);
     xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.setRequestHeader("Authorization", getCookie("token"));
     xhttp.send(JSON.stringify(game));
 }
 
@@ -23,10 +24,11 @@ function login(url, name, password) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         console.log(xhttp.response);
-        document.cookie = xhttp.response;
+        document.cookie = "token=" + xhttp.response;
     }
     xhttp.open("POST", url + "/login", true);
     xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.setRequestHeader("Authorization", document.cookie);
     xhttp.send(JSON.stringify({ name: name, password: password }));
 }
 
@@ -50,4 +52,20 @@ function mode(numbers) {
         }
 
     return modes;
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }

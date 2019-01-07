@@ -1,3 +1,14 @@
-input{
-    display: block;
+.tile p{
+	display:inline;
+	margin-right:10px;
+	margin-bottom:0px;
+}
+
+.tile p::after{
+	content: ' |';
+}
+
+.tiles-header{
+	margin-bottom:5px;
+	text-decoration:underline;
 }

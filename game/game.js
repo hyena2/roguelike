@@ -44,7 +44,6 @@ var state = {
 		},
 		attack: function (targetTile,npc){
 			npc.hp--; //TODO change this, insert combat system
-			console.log(npc);
 			if(npc.hp <= 0){
 				//Make the npc dissapear
 				state.mapNpcs = state.mapNpcs.filter(n => n != npc);

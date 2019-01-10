@@ -19,6 +19,7 @@
 				<input class="inputfile" id="file" type='file' accept='text/plain' onchange='openFile(event)'><br>
 			</div>
 			<div class="game-editor">
+				<img src="rogueeditor.png" class="header-image"></img>
 				<h3>Tile editor</h3>
 				<div class="parameters">
 					<label>Tile character</label>
@@ -45,7 +46,7 @@
 
 				<button id="tile-save" class="save-button">Save</button>
 
-				<p class="tiles-header">Tiles</p>
+				<hr></hr>
 				<div id="tiles">
 					<!--Tiles -->
 				</div>
@@ -61,26 +62,55 @@
 				</div>
 				<div class="parameters">
 					<span>Attack</span>
-					<input type="number" id="npc-attack" class="npc-input-number">
+					<input type="number" id="npc-attack" class="input-number">
 				</div>
 				<div class="parameters">
 					<span>Defense</span>
-					<input type="number" id="npc-defense" class="npc-input-number">
+					<input type="number" id="npc-defense" class="input-number">
 				</div>
 				<div class="parameters">
 					<span>Hp</span>
-					<input type="number" id="npc-hp" class="npc-input-number">
+					<input type="number" id="npc-hp" class="input-number">
 				</div>
 				<button id="npc-save" class="save-button">Save</button>
 
-				<p class="npcs-header">Npcs</p>
+				<hr></hr>
 				<div id="npcs">
 					<!--Npcs -->
 				</div>
 
 				<h3>Object editor</h3>
-				<div>
-					<!--Objects editor -->
+				<div class="parameters">
+					<span>Object character</span>
+					<input type="Text" id="object-character" size="1" maxLength="1" class="character-input">
+				</div>
+				<div class="parameters">
+					<span>Description</span>
+					<input type="Text" id="object-description">
+				</div>
+				<div class="parameters">
+					<span>Equipment</span>
+					<label class="check-container">
+						<span class="checkmark"></span>
+						<input type="checkbox" id="equipment" class="check">
+					</label>
+				</div>
+				<div class="parameters">
+					<span>Attack</span>
+					<input type="number" id="object-attack" class="input-number">
+				</div>
+				<div class="parameters">
+					<span>Defense</span>
+					<input type="number" id="object-defense" class="input-number">
+				</div>
+				<div class="parameters">
+					<span>Hp</span>
+					<input type="number" id="object-hp" class="input-number">
+				</div>
+				<button id="object-save" class="save-button">Save</button>
+				<hr></hr>
+				<div id="objects">
+					<!--Objects -->
 				</div>
 
 				<h3>Map editor</h3>
@@ -90,8 +120,9 @@
 						<input type="text" id="mapName">
 					</div>
 					<button id="map-save" class="save-button">Save</button>
-					<p class="maps-header">Maps</p>
+					<hr></hr>
 					<div id="maps">
+						<!--Maps -->
 					</div>
 					<div id="map-holder">
 					</div>

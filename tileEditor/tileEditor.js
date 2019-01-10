@@ -6,10 +6,10 @@ var tilesUpdater = {
 		}
 		state.game.tiles.map(tile => {
 			newTileNode = '<div class="tile">'+
-				'<p>Character: ' + tile.character + '</p>' +
-				'<p>Description: ' + tile.description + '</p>' + 
-				'<p>Damage: ' + tile.damage + '</p>' +
-				'<p>Solid: ' + tile.solid + '</p>'+
+				'<p>Character: ' + tile.character + '<p>' +
+				'<p>Description: ' + tile.description + '<p>' + 
+				'<p>Damage: ' + tile.damage + '<p>' +
+				'<p>Solid: ' + tile.solid + '<p>'+
 				'<button class="remove-button" tile="'+ tile.character + '" onclick="removeTile(this)">Remove</button>' +
 				'</div>';
 			tilesNode.insertAdjacentHTML('beforeend',newTileNode); //Inserts string as html code

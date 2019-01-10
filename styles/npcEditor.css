@@ -1,11 +1,9 @@
-.npc-input-number{
-	width:20px;
-}
 
 .npc p{
 	display:inline;
 	margin-right:10px;
 	margin-bottom:0px;
+	color:grey;
 }
 
 .npc p::after{
@@ -25,5 +23,6 @@ input[type="number"] {
 
 .npcs-header{
 	margin-bottom:5px;
+	margin-top:4px;
 	text-decoration:underline;
 }

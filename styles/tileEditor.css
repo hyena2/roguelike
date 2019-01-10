@@ -2,6 +2,7 @@
 	display:inline;
 	margin-right:10px;
 	margin-bottom:0px;
+	color:grey;
 }
 
 .tile p::after{
@@ -10,5 +11,7 @@
 
 .tiles-header{
 	margin-bottom:5px;
+	margin-top:4px;
 	text-decoration:underline;
+	display:none;
 }

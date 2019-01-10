@@ -1,16 +1,12 @@
-1- Editor de tiles: sobreescribir tiles con el mismo caracter # DONE
-2- Editor de npcs #DONE
-3- Editor de objetos
+3- Editor de objetos #DONE, add take machanic, add use mechanic, add equip mechanic
 4- Conexion entre mapas
-5- Conditions to win #DONE 
 6 - Add tile color
 7 - Add doors
 8- Move player.js to game.js (?)
 9 - Add inventory
-10 - Add users
-
-//TODO PARA PRIMER PROTOTYPE
-1- Que desaparezca las tiles donde empiezan los personajes #DONE
-2- Ataque de los npcs al jugador #DONE
-3- Winning condition #LOGIC DONE, ADD ACTIONS KILLING
-4 - Cambiar logica de enseñar texto, debe haber un buffer de texto que se flushee al final del turno. #DONE
+10 - stilizar game.html
+11- Añaadir game properties -> gamename, initial map, initial player pos
+12- añadir escaleras (transporte a otro mapa y coordenadas)
+13- Remover ALT, caps lock e indeseadas del mapa.
+14- Comporbar que tile existe para añadir en el mapa
+15- Solo añadir tile si se esta centrado en el mapa

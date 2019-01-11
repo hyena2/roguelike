@@ -6,3 +6,18 @@
 #map-holder{
 	text-align:center;
 }
+
+#maps p{
+	display:inline;
+	margin-right:10px;
+	margin-bottom:0px;
+	color:grey;
+}
+
+#maps p::after{
+	content: ' |';
+}
+
+#maps{
+	margin-bottom:10px;
+}

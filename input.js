@@ -9,12 +9,24 @@ document.onkeyup = function(key){
 			state.player.choosenCommand(state.map.map[state.player.x + 1][state.player.y],npc);
 			//updateMap();
 		}else{
-			var npcsInTargetPosition = state.mapNpcs.filter(n => n.posX == state.player.x + 1 && n.posY == state.player.y).length > 0 ? true : false;
-			if(state.tiles[state.map.map[state.player.x + 1][state.player.y]].solid == false && !npcsInTargetPosition){
-				updatedPlayer = state.player;
-				updatedPlayer.x++;
-				state.set(['player'],[updatedPlayer],true);
-				//text += "You moved to the East.";
+			if(state.player.x == state.width -1){
+				var mapX = state.map.x;
+				var nextMap = state.game.maps.filter(m => m.x == Number(mapX) + 1);
+				if(nextMap[0] != undefined){
+					var updatedPlayer = state.player;
+					updatedPlayer.x = 0;
+					state.set(['map'],[nextMap[0]]);
+					state.drawMap();
+					state.set(['player'],[updatedPlayer]);
+				}
+			}else{
+				var npcsInTargetPosition = state.mapNpcs.filter(n => n.posX == state.player.x + 1 && n.posY == state.player.y).length > 0 ? true : false;
+				if(state.tiles[state.map.map[state.player.x + 1][state.player.y]].solid == false && !npcsInTargetPosition){
+					updatedPlayer = state.player;
+					updatedPlayer.x++;
+					state.set(['player'],[updatedPlayer],true);
+					//text += "You moved to the East.";
+				}
 			}
 		}
 	}
@@ -26,12 +38,24 @@ document.onkeyup = function(key){
 			state.player.choosenCommand(state.map.map[state.player.x - 1][state.player.y],npc);
 			//updateMap();
 		}else{
-			var npcsInTargetPosition = state.mapNpcs.filter(n => n.posX == state.player.x - 1 && n.posY == state.player.y).length > 0 ? true : false;
-			if(state.tiles[state.map.map[state.player.x - 1][state.player.y]].solid == false && !npcsInTargetPosition){
-				updatedPlayer = state.player;
-				updatedPlayer.x--;
-				state.set(['player'],[updatedPlayer],true);
-				//text += "You moved to the West.";
+			if(state.player.x == 0){
+				var mapX = state.map.x;
+				var nextMap = state.game.maps.filter(m => m.x == Number(mapX) - 1);
+				if(nextMap[0] != undefined){
+					var updatedPlayer = state.player;
+					updatedPlayer.x = state.width - 1;
+					state.set(['map'],[nextMap[0]]);
+					state.drawMap();
+					state.set(['player'],[updatedPlayer]);
+				}
+			}else{
+				var npcsInTargetPosition = state.mapNpcs.filter(n => n.posX == state.player.x - 1 && n.posY == state.player.y).length > 0 ? true : false;
+				if(state.tiles[state.map.map[state.player.x - 1][state.player.y]].solid == false && !npcsInTargetPosition){
+					updatedPlayer = state.player;
+					updatedPlayer.x--;
+					state.set(['player'],[updatedPlayer],true);
+					//text += "You moved to the West.";
+				}
 			}
 		}
 	}
@@ -43,12 +67,24 @@ document.onkeyup = function(key){
 			state.player.choosenCommand(state.map.map[state.player.x][state.player.y + 1],npc);
 			//updateMap();
 		}else{
-			var npcsInTargetPosition = state.mapNpcs.filter(n => n.posY == state.player.y + 1 && n.posX == state.player.x).length > 0 ? true : false;
-			if(state.tiles[state.map.map[state.player.x][state.player.y + 1]].solid == false && !npcsInTargetPosition){
-				updatedPlayer = state.player;
-				updatedPlayer.y++;
-				state.set(['player'],[updatedPlayer],true);
-				//text += "You moved to the South.";
+			if(state.player.y == state.height - 1){
+				var mapY = state.map.y;
+				var nextMap = state.game.maps.filter(m => m.y == Number(mapY) + 1);
+				if(nextMap[0] != undefined){
+					var updatedPlayer = state.player;
+					updatedPlayer.y = 0;
+					state.set(['map'],[nextMap[0]]);
+					state.drawMap();
+					state.set(['player'],[updatedPlayer]);
+				}
+			}else{
+				var npcsInTargetPosition = state.mapNpcs.filter(n => n.posY == state.player.y + 1 && n.posX == state.player.x).length > 0 ? true : false;
+				if(state.tiles[state.map.map[state.player.x][state.player.y + 1]].solid == false && !npcsInTargetPosition){
+					updatedPlayer = state.player;
+					updatedPlayer.y++;
+					state.set(['player'],[updatedPlayer],true);
+					//text += "You moved to the South.";
+				}
 			}
 		}
 	}
@@ -60,12 +96,24 @@ document.onkeyup = function(key){
 			state.player.choosenCommand(state.map.map[state.player.x][state.player.y - 1],npc);
 			//updateMap();
 		}else{
-			var npcsInTargetPosition = state.mapNpcs.filter(n => n.posY == state.player.y - 1 && n.posX == state.player.x).length > 0 ? true : false;
-			if(state.tiles[state.map.map[state.player.x][state.player.y - 1]].solid == false && !npcsInTargetPosition){
-				updatedPlayer = state.player;
-				updatedPlayer.y--;
-				state.set(['player'],[updatedPlayer],true);
-				//text += "You moved to the North.";
+			if(state.player.y == 0){
+				var mapY = state.map.y;
+				var nextMap = state.game.maps.filter(m => m.y == Number(mapY) - 1);
+				if(nextMap[0] != undefined){
+					var updatedPlayer = state.player;
+					updatedPlayer.y = state.height - 1;
+					state.set(['map'],[nextMap[0]]);
+					state.drawMap();
+					state.set(['player'],[updatedPlayer]);
+				}
+			}else{
+				var npcsInTargetPosition = state.mapNpcs.filter(n => n.posY == state.player.y - 1 && n.posX == state.player.x).length > 0 ? true : false;
+				if(state.tiles[state.map.map[state.player.x][state.player.y - 1]].solid == false && !npcsInTargetPosition){
+					updatedPlayer = state.player;
+					updatedPlayer.y--;
+					state.set(['player'],[updatedPlayer],true);
+					//text += "You moved to the North.";
+				}
 			}
 		}
 	}

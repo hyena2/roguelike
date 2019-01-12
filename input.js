@@ -17,7 +17,7 @@ document.onkeyup = function(key){
 					updatedPlayer.x = 0;
 					state.set(['map'],[nextMap[0]]);
 					state.drawMap();
-					state.set(['player'],[updatedPlayer]);
+					state.set(['player'],[updatedPlayer],true);
 				}
 			}else{
 				var npcsInTargetPosition = state.mapNpcs.filter(n => n.posX == state.player.x + 1 && n.posY == state.player.y).length > 0 ? true : false;
@@ -46,7 +46,7 @@ document.onkeyup = function(key){
 					updatedPlayer.x = state.width - 1;
 					state.set(['map'],[nextMap[0]]);
 					state.drawMap();
-					state.set(['player'],[updatedPlayer]);
+					state.set(['player'],[updatedPlayer],true);
 				}
 			}else{
 				var npcsInTargetPosition = state.mapNpcs.filter(n => n.posX == state.player.x - 1 && n.posY == state.player.y).length > 0 ? true : false;
@@ -75,7 +75,7 @@ document.onkeyup = function(key){
 					updatedPlayer.y = 0;
 					state.set(['map'],[nextMap[0]]);
 					state.drawMap();
-					state.set(['player'],[updatedPlayer]);
+					state.set(['player'],[updatedPlayer],true);
 				}
 			}else{
 				var npcsInTargetPosition = state.mapNpcs.filter(n => n.posY == state.player.y + 1 && n.posX == state.player.x).length > 0 ? true : false;
@@ -104,7 +104,7 @@ document.onkeyup = function(key){
 					updatedPlayer.y = state.height - 1;
 					state.set(['map'],[nextMap[0]]);
 					state.drawMap();
-					state.set(['player'],[updatedPlayer]);
+					state.set(['player'],[updatedPlayer],true);
 				}
 			}else{
 				var npcsInTargetPosition = state.mapNpcs.filter(n => n.posY == state.player.y - 1 && n.posX == state.player.x).length > 0 ? true : false;

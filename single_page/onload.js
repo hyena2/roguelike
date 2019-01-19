@@ -6,4 +6,5 @@ window.onload = function () {
 	state.drawMap();
 	state.subscribe(tilesUpdater);
 	state.subscribe(npcsUpdater);
+	state.subscribe(objectsUpdater);
 }

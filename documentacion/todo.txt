@@ -1,8 +1,7 @@
-3- Editor de objetos #DONE, add take machanic, add use mechanic, add equip mechanic
-4- Conexion entre mapas
+3- Editor de objetos #DONE, add take machanic #DONE, add use mechanic, add equip mechanic
+4- Conexion entre mapas #DONE
 6 - Add tile color
-7 - Add doors
-8- Move player.js to game.js (?)
+7 - Add doors (?)
 9 - Add inventory
 10 - stilizar game.html
 11- Añaadir game properties -> gamename, initial map, initial player pos
@@ -10,3 +9,4 @@
 13- Remover ALT, caps lock e indeseadas del mapa.
 14- Comporbar que tile existe para añadir en el mapa
 15- Solo añadir tile si se esta centrado en el mapa
+16- añadir scripting

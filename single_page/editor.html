@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../styles/common.css">
 		<link rel="stylesheet" type="text/css" href="../styles/tileEditor.css">
@@ -88,25 +89,6 @@
 					<span>Description</span>
 					<input type="Text" id="object-description">
 				</div>
-				<div class="parameters">
-					<span>Equipment</span>
-					<label class="check-container">
-						<span class="checkmark"></span>
-						<input type="checkbox" id="equipment" class="check">
-					</label>
-				</div>
-				<div class="parameters">
-					<span>Attack</span>
-					<input type="number" id="object-attack" class="input-number">
-				</div>
-				<div class="parameters">
-					<span>Defense</span>
-					<input type="number" id="object-defense" class="input-number">
-				</div>
-				<div class="parameters">
-					<span>Hp</span>
-					<input type="number" id="object-hp" class="input-number">
-				</div>
 				<button id="object-save" class="save-button">Save</button>
 				<hr></hr>
 				<div id="objects">
@@ -142,6 +124,7 @@
 		<script src="../mapEditor/mapEditor.js"></script>
 		<script src="../tileEditor/tileEditor.js"></script>
 		<script src="../npcEditor/npcEditor.js"></script>
+		<script src="../objectEditor/objectEditor.js"></script>
 		<script src="./onload.js"></script>
 		<script src="./gameExport.js"></script>
 	</body>

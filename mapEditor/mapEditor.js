@@ -33,10 +33,10 @@ var gameMapsUpdate = {
 			mapsNode.removeChild(mapsNode.lastChild);
 		}
 		state.game.maps.map(map => {
-			newMapNode = '<p class="map" map-name="' + map.mapName + '">' + map.mapName + '</p><p> MapX:' + map.x + '</p><p> MapY:' + map.y + '</p>';
+			newMapNode = '<div><p class="map" map-name="' + map.mapName + '">' + map.mapName + '</p><p> MapX:' + map.x + '</p><p> MapY:' + map.y + '</p></div>';
 			mapsNode.insertAdjacentHTML('beforeend', newMapNode); //Inserts string as html code
 		})
-		var maps = document.getElementsByClassName("maps");
+		var maps = document.getElementsByClassName("map");
 		for (var i = 0; i < maps.length; i++) {
 			maps[i].onclick = function () {
 				var mapName = this.getAttribute("map-name");

@@ -9,6 +9,7 @@ var state = {
 		maps : [],
 		tiles : [],
 		npcs : [],
+		objects : [],
 		winningCondition : [],
 	},
 	gameMaps: null,

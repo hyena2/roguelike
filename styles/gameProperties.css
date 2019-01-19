@@ -6,3 +6,8 @@
 	position: absolute;
 	z-index: -1;
 }
+
+.game-properties .parameters{
+    display:block;
+    margin-top: 15px;
+}

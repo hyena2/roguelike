@@ -1,131 +1,147 @@
 <html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="../styles/common.css">
-		<link rel="stylesheet" type="text/css" href="../styles/tileEditor.css">
-		<link rel="stylesheet" type="text/css" href="../styles/npcEditor.css">
-		<link rel="stylesheet" type="text/css" href="../styles/mapEditor.css">
-		<link rel="stylesheet" type="text/css" href="../styles/gameProperties.css">
-		<title>Editor</title>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../styles/common.css">
+    <link rel="stylesheet" type="text/css" href="../styles/tileEditor.css">
+    <link rel="stylesheet" type="text/css" href="../styles/npcEditor.css">
+    <link rel="stylesheet" type="text/css" href="../styles/mapEditor.css">
+    <link rel="stylesheet" type="text/css" href="../styles/gameProperties.css">
+    <title>Editor</title>
 
-	</head>
-	<body>
-		<div class="main-frame">
-			<div class="game-properties">
-				<h3>Game properties</h3>
-				<p id="game-export">Export game</p>
-				<label for="file">Import game</label>
-				<input class="inputfile" id="file" type='file' accept='text/plain' onchange='openFile(event)'><br>
-			</div>
-			<div class="game-editor">
-				<img src="rogueeditor.png" class="header-image"></img>
-				<h3>Tile editor</h3>
-				<div class="parameters">
-					<label>Tile character</label>
-					<input type="Text" id="character" size="1" maxLength="1" class="character-input">
-				</div>
-				<div class="parameters">
-					<label>Description</label>
-					<input type="Text" id="description">
-				</div>
-				<div class="parameters">
-					<span>Damage</span>
-					<label class="check-container">
-						<span class="checkmark"></span>
-						<input type="checkbox" id="damage" class="check">
-					</label>
-				</div>
-				<div class="parameters">
-					<span>Solid</span>
-					<label class="check-container">
-						<span class="checkmark"></span>
-						<input type="checkbox" id="solid" class="check">
-					</label>
-				</div>
+  </head>
+  <body>
+    <div class="main-frame">
+      <div class="game-properties">
+        <h3>Game properties</h3>
+        <p id="game-export">Export game</p>
+        <label for="file">Import game</label>
+        <input class="inputfile" id="file" type='file' accept='text/plain' onchange='openFile(event)'><br>
+        <div class="parameters">
+          <label>Game name</label>
+          <input type="Text" id="character" maxLength="15">
+        </div>
+        <div class="parameters">
+          <span>Player initial X</span>
+          <input type="number" id="initial-x" class="input-number">
+        </div>
+        <div class="parameters">
+          <span>Player initial Y</span>
+          <input type="number" id="initial-y" class="input-number">
+        </div>
+        <div class="parameters">
+        <label for="file">Import script</label>
+        <input class="inputfile" id="file" type='file' accept='text/plain' onchange='openScript(event)'><br>
+        </div>
+      </div>
+      <div class="game-editor">
+        <img src="rogueeditor.png" class="header-image"></img>
+        <h3>Tile editor</h3>
+        <div class="parameters">
+          <label>Tile character</label>
+          <input type="Text" id="character" size="1" maxLength="1" class="character-input">
+        </div>
+        <div class="parameters">
+          <label>Description</label>
+          <input type="Text" id="description">
+        </div>
+        <div class="parameters">
+          <span>Damage</span>
+          <label class="check-container">
+            <span class="checkmark"></span>
+            <input type="checkbox" id="damage" class="check">
+          </label>
+        </div>
+        <div class="parameters">
+          <span>Solid</span>
+          <label class="check-container">
+            <span class="checkmark"></span>
+            <input type="checkbox" id="solid" class="check">
+          </label>
+        </div>
 
-				<button id="tile-save" class="save-button">Save</button>
+        <button id="tile-save" class="save-button">Save</button>
 
-				<hr></hr>
-				<div id="tiles">
-					<!--Tiles -->
-				</div>
+        <hr></hr>
+        <div id="tiles">
+          <!--Tiles -->
+        </div>
 
-				<h3>Npc editor</h3>
-				<div class="parameters">
-					<span>Tile character</span>
-					<input type="Text" id="npc-character" size="1" maxLength="1" class="character-input">
-				</div>
-				<div class="parameters">
-					<span>Description</span>
-					<input type="Text" id="npc-description">
-				</div>
-				<div class="parameters">
-					<span>Attack</span>
-					<input type="number" id="npc-attack" class="input-number">
-				</div>
-				<div class="parameters">
-					<span>Defense</span>
-					<input type="number" id="npc-defense" class="input-number">
-				</div>
-				<div class="parameters">
-					<span>Hp</span>
-					<input type="number" id="npc-hp" class="input-number">
-				</div>
-				<button id="npc-save" class="save-button">Save</button>
+        <h3>Npc editor</h3>
+        <div class="parameters">
+          <span>Tile character</span>
+          <input type="Text" id="npc-character" size="1" maxLength="1" class="character-input">
+        </div>
+        <div class="parameters">
+          <span>Description</span>
+          <input type="Text" id="npc-description">
+        </div>
+        <div class="parameters">
+          <span>Attack</span>
+          <input type="number" id="npc-attack" class="input-number">
+        </div>
+        <div class="parameters">
+          <span>Defense</span>
+          <input type="number" id="npc-defense" class="input-number">
+        </div>
+        <div class="parameters">
+          <span>Hp</span>
+          <input type="number" id="npc-hp" class="input-number">
+        </div>
+        <button id="npc-save" class="save-button">Save</button>
 
-				<hr></hr>
-				<div id="npcs">
-					<!--Npcs -->
-				</div>
+        <hr></hr>
+        <div id="npcs">
+          <!--Npcs -->
+        </div>
 
-				<h3>Object editor</h3>
-				<div class="parameters">
-					<span>Object character</span>
-					<input type="Text" id="object-character" size="1" maxLength="1" class="character-input">
-				</div>
-				<div class="parameters">
-					<span>Description</span>
-					<input type="Text" id="object-description">
-				</div>
-				<button id="object-save" class="save-button">Save</button>
-				<hr></hr>
-				<div id="objects">
-					<!--Objects -->
-				</div>
+        <h3>Object editor</h3>
+        <div class="parameters">
+          <span>Object character</span>
+          <input type="Text" id="object-character" size="1" maxLength="1" class="character-input">
+        </div>
+        <div class="parameters">
+          <span>Description</span>
+          <input type="Text" id="object-description">
+        </div>
+        <button id="object-save" class="save-button">Save</button>
+        <hr></hr>
+        <div id="objects">
+          <!--Objects -->
+        </div>
 
-				<h3>Map editor</h3>
-				<div class="parameters">
-					<label>Map name</label>
-					<input type="text" id="mapName">
-				</div>
-				<div class="parameters">
-					<span>X</span>
-					<input type="number" id="mapX" class="input-number">
-				</div>
-				<div class="parameters">
-					<span>Y</span>
-					<input type="number" id="mapY" class="input-number">
-				</div>
-				<button id="map-save" class="save-button">Save</button>
-				<hr></hr>
-				<div id="maps">
-					<!--Maps -->
-				</div>
-				<div id="map-holder">
-				</div>
-			</div>
-		</div>
-		<script src="../rot.js"></script>
-		<script src="../common.js"></script>
-		<script src="../utils.js"></script>
-		<script src="editor.js"></script>
-		<script src="../mapEditor/mapEditor.js"></script>
-		<script src="../tileEditor/tileEditor.js"></script>
-		<script src="../npcEditor/npcEditor.js"></script>
-		<script src="../objectEditor/objectEditor.js"></script>
-		<script src="./onload.js"></script>
-		<script src="./gameExport.js"></script>
-	</body>
+        <h3>Map editor</h3>
+        <div class="parameters">
+          <label>Map name</label>
+          <input type="text" id="mapName">
+        </div>
+        <div class="parameters">
+          <span>X</span>
+          <input type="number" id="mapX" class="input-number">
+        </div>
+        <div class="parameters">
+          <span>Y</span>
+          <input type="number" id="mapY" class="input-number">
+        </div>
+        <button id="map-save" class="save-button">Save</button>
+        <hr></hr>
+        <div id="maps">
+          <!--Maps -->
+        </div>
+        <div id="map-holder">
+        </div>
+      </div>
+    </div>
+    <script src="../rot.js"></script>
+    <script src="../common.js"></script>
+    <script src="../utils.js"></script>
+    <script src="editor.js"></script>
+    <script src="../mapEditor/mapEditor.js"></script>
+    <script src="../tileEditor/tileEditor.js"></script>
+    <script src="../npcEditor/npcEditor.js"></script>
+    <script src="../objectEditor/objectEditor.js"></script>
+    <script src="./onload.js"></script>
+    <script src="./gameExport.js"></script>
+  </body>
 </html>

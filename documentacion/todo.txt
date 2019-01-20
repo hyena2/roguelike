@@ -3,5 +3,4 @@
 13- Remover ALT, caps lock e indeseadas del mapa.
 14- Comporbar que tile existe para añadir en el mapa
 15- Solo añadir tile si se esta centrado en el mapa
-16- añadir scripting
 17- añadir menu superior con links a Documentacion, Juego

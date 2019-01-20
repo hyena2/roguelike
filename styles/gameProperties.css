@@ -1,13 +1,18 @@
 .inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
 
 .game-properties .parameters{
     display:block;
     margin-top: 15px;
+}
+
+#winningCondition{
+    margin-top: 10px;
+    height : 300px;
 }

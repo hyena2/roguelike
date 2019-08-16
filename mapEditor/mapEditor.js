@@ -25,6 +25,16 @@ var editorPosHandler = {
 	}
 }
 
+var mouseOverMapHandler = {
+	callback: function (state) {
+		if (state.mouseOverMap) {
+			document.getElementById("map-holder").style.border = "1px solid white";
+		}else{
+			document.getElementById("map-holder").style.border = "0px solid white";
+		}
+	}
+}
+
 //Subscriber
 var gameMapsUpdate = {
 	callback: function (state) {
@@ -82,11 +92,11 @@ window.onkeydown = function (e) {
 }
 
 //Event
-document.getElementById("map-holder").onmouseenter = function(){
-	state.mouseOverMap = true;
+document.getElementById("map-holder").onmouseenter = function () {
+	state.set(['mouseOverMap'], [true]);
 };
-document.getElementById("map-holder").onmouseout = function(){
-	state.mouseOverMap = false;
+document.getElementById("map-holder").onmouseout = function () {
+	state.set(['mouseOverMap'], [false]);
 };
 
 //Event

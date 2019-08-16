@@ -13,7 +13,7 @@ npcUtils = {
 					break;
 				}
 			case 1:
-				if(npc.posX < state.width){
+				if(npc.posX < state.width - 1){
 					var npcsInTargetPosition = state.mapNpcs.filter(n => n.posX == npc.posX + 1 && n.posY == npc.posY).length > 0 ? true : false;
 					var playerInTargetPosition = state.player.x == npc.posX + 1 && state.player.y == npc.posY;
 					var targetTileIsSolid = state.tiles[state.map.map[npc.posX+1][npc.posY]].solid;
@@ -33,7 +33,7 @@ npcUtils = {
 					break;
 				}
 			case 3:
-				if(npc.posY < state.height){
+				if(npc.posY < state.height - 1){
 					var npcsInTargetPosition = state.mapNpcs.filter(n => n.posY == npc.posY + 1 && n.posX == npc.posX).length > 0 ? true : false;
 					var playerInTargetPosition = state.player.y == npc.posY + 1 && state.player.x == npc.posX;
 					var targetTileIsSolid = state.tiles[state.map.map[npc.posX][npc.posY+1]].solid;

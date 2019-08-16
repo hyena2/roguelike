@@ -7,4 +7,5 @@ window.onload = function () {
 	state.subscribe(tilesUpdater);
 	state.subscribe(npcsUpdater);
 	state.subscribe(objectsUpdater);
+	state.subscribe(mouseOverMapHandler);
 }

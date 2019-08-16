@@ -50,34 +50,44 @@ var gameMapsUpdate = {
 
 //Event
 window.onkeydown = function (e) {
-	if (e.key == "ArrowDown") {
-		e.preventDefault();
-		state.set(['previousEditorPos'], [state.currentEditorPos]);
-		state.set(['currentEditorPos'], [[state.currentEditorPos[0], state.currentEditorPos[1] + 1]]);
-	}
-	else if (e.key == "ArrowUp") {
-		e.preventDefault();
-		state.set(['previousEditorPos'], [state.currentEditorPos]);
-		state.set(['currentEditorPos'], [[state.currentEditorPos[0], state.currentEditorPos[1] - 1]]);
-	}
-	else if (e.key == "ArrowRight") {
-		e.preventDefault();
-		state.set(['previousEditorPos'], [state.currentEditorPos]);
-		state.set(['currentEditorPos'], [[state.currentEditorPos[0] + 1, state.currentEditorPos[1]]]);
-	}
-	else if (e.key == "ArrowLeft") {
-		e.preventDefault();
-		state.set(['previousEditorPos'], [state.currentEditorPos]);
-		state.set(['currentEditorPos'], [[state.currentEditorPos[0] - 1, state.currentEditorPos[1]]]);
-	}
-	else {
-		if (e.key != "Shift" && e.key != "AltGraph" && e.key != "Dead" && e.key != "Control") {
-			var updatedMap = state.map;
-			updatedMap['map'][state.currentEditorPos[0]][state.currentEditorPos[1]] = e.key;
-			state.set(['map'], [updatedMap]);
+	if (state.mouseOverMap) {
+		if (e.key == "ArrowDown") {
+			e.preventDefault();
+			state.set(['previousEditorPos'], [state.currentEditorPos]);
+			state.set(['currentEditorPos'], [[state.currentEditorPos[0], state.currentEditorPos[1] + 1]]);
+		}
+		else if (e.key == "ArrowUp") {
+			e.preventDefault();
+			state.set(['previousEditorPos'], [state.currentEditorPos]);
+			state.set(['currentEditorPos'], [[state.currentEditorPos[0], state.currentEditorPos[1] - 1]]);
+		}
+		else if (e.key == "ArrowRight") {
+			e.preventDefault();
+			state.set(['previousEditorPos'], [state.currentEditorPos]);
+			state.set(['currentEditorPos'], [[state.currentEditorPos[0] + 1, state.currentEditorPos[1]]]);
+		}
+		else if (e.key == "ArrowLeft") {
+			e.preventDefault();
+			state.set(['previousEditorPos'], [state.currentEditorPos]);
+			state.set(['currentEditorPos'], [[state.currentEditorPos[0] - 1, state.currentEditorPos[1]]]);
+		}
+		else {
+			if (e.key != "Shift" && e.key != "AltGraph" && e.key != "Dead" && e.key != "Control") {
+				var updatedMap = state.map;
+				updatedMap['map'][state.currentEditorPos[0]][state.currentEditorPos[1]] = e.key;
+				state.set(['map'], [updatedMap]);
+			}
 		}
 	}
 }
+
+//Event
+document.getElementById("map-holder").onmouseenter = function(){
+	state.mouseOverMap = true;
+};
+document.getElementById("map-holder").onmouseout = function(){
+	state.mouseOverMap = false;
+};
 
 //Event
 var saveMap = document.getElementById("map-save");

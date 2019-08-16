@@ -19,7 +19,7 @@ var tilesUpdater = {
 //Event
 var saveButton = document.getElementById("tile-save");
 saveButton.onclick = function () {
-	var character = document.getElementById("character").value;
+	var character = document.getElementById("tile-character").value;
 	var description = document.getElementById("description").value;
 	var damage = document.getElementById("damage").checked;
 	var solid = document.getElementById("solid").checked;

@@ -4,6 +4,7 @@ var state = {
 	map : { mapName : "", map : null},
 	previousEditorPos : [0,0],
 	currentEditorPos : [0,0],
+	mouseOverMap : false,
 	game : {
 		gameName : "",
 		maps : [],
